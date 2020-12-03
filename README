@@ -1,0 +1,38 @@
+DNFP analyzer
+======
+
+Dungeon & Fighter (Korean) Character Analyzer with Python Flask and Neople Open API (for dnfp.xyz) 
+
+Install
+-------
+
+Create a virtualenv and activate it::
+
+    $ python3 -m venv venv
+    $ . venv/bin/activate
+
+Or on Windows cmd::
+    $ py -3 -m venv venv
+    $ venv\Scripts\activate.bat
+
+Install Flaskr::
+
+    $ pip install Flask
+
+If you met errors while Running application, please install required modules too.
+
+
+Run
+---
+
+::
+
+    $ export FLASK_APP=dnfp
+    $ flask run
+
+Or on Windows cmd::
+
+    > set FLASK_APP=dnfp
+    > flask run
+
+Open http://127.0.0.1:5000 in a browser.
