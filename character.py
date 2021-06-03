@@ -55,7 +55,7 @@ class Character():
 
         return (buff30_base, buff50_base, buff_name, apo_name, passive_name, buff_aura_name)
 
-    def analyze_stat(self):
+    def analyze_stat(self, diff = None):
         stat_info = {'힘':0, '체':0, '지':0, '정':0}
         elem_info = {}
         dam_info = {}
@@ -75,6 +75,10 @@ class Character():
             
             self.char_stat[cur_name] = cur_val
 
+            if diff is not None:
+                if cur_name in diff.keys():
+                    self.char_stat[cur_name] += diff[cur_name]
+
         max_stat = max(stat_info.values())
         self.char_stat['주스탯'] = {'value':max_stat, 'list':[]}
         for key in stat_info.keys():
@@ -84,7 +88,7 @@ class Character():
         max_elem = max(elem_info.values())
         self.char_stat['주속강'] = {'value':max_elem, 'list':[]}
         for key in elem_info.keys():
-            if elem_info[key] == max_elem:
+            if max_elem - elem_info[key] < 13:
                 self.char_stat['주속강']['list'].append(key)
 
         max_dam = max(dam_info.values())
@@ -95,14 +99,26 @@ class Character():
     
     def analyze_sw(self, cbuff):
         sinfo = self.sw_dict['skill']['buff']['skillInfo']    
-        
-        sw_name = cbuff['name']
-        sw_values = sinfo['option']['values']
-        sw_lvl = sinfo['option']['level']
+
         vidx = cbuff['option_idx']
-        
         self.char_stat['nick'] = self.nick = cbuff['nick']
         self.base_stat = cbuff['base_stat']
+
+        if self.nick in ['ghostknight', 'daemonslayer', 'vegabond', 'mnenmaster', 'mlauncher', 'mmechanic', 'darknight', 'mranger', 'duelist', 'dragonknight', 'rogue', 'franger', 'daemonknight', 'fspitfire', 'battlemage', 'holybattle', 'vanguard', 'berserk', 'icemage', 'necromancer', 'swordmaster', 'fstriker', 'avenger', 'dimrunner', 'elemental', 'elvenknight', 'flauncher', 'fmechanic', 'agent', 'warlock', 'infighter', 'mspitfire', 'siranui', 'mstriker', 'dragonlancer']:
+            self.char_stat['char_type'] = '딜러'
+        elif self.nick in ['weaponmaster', 'diva', 'redemer', 'alchemist', 'bloodmage', 'dancer', 'shadowdancer', 'soulbringer', 'summoner', 'asura', 'windmage', 'darktempler', 'fnenmaster', 'poisonmaster', 'inferno', 'giant', 'mstreetfighter', 'creator', 'exocist', 'troubleshooter', 'paladin', 'pathfinder', 'darklancer', 'hitman']:
+            self.char_stat['char_type'] = '시너지'
+        else:
+            self.char_stat['char_type'] = '버퍼'
+
+        sw_name = sinfo['name']
+        if sinfo['option'] is None:
+            self.char_stat['버프'] = (sw_name, 0, 0, None)
+            self.inner_data['dam_type'] = "독립공격"
+            return
+
+        sw_values = sinfo['option']['values']
+        sw_lvl = sinfo['option']['level']
 
         if self.buffer is None:
             buff_max = cbuff['option_max']
@@ -118,7 +134,7 @@ class Character():
                     if sw_name == "오기조원":
                         evval *= 5
                     extra_buff.append((etyp, evval))
-
+        
             for eb in extra_buff: 
                 typ, v = eb
                 for key in self.char_stat.keys():
@@ -132,7 +148,13 @@ class Character():
 
             buff_power = buff_val/buff_max * 100
 
+            if buff_power > 100:
+                buff_power = 100
+
             self.char_stat['버프'] = (sw_name, sw_lvl, buff_val, buff_power)
+            
+            self.char_stat['points'] += buff_power
+
         else:
             buff_val = float(sw_values[vidx])
             self.char_stat['버프'] = (sw_name, sw_lvl, buff_val, None)
@@ -154,7 +176,6 @@ class Character():
             except:
                 max_retry -= 1
                 if max_retry == 0:
-
                     raise
             else:
                 break
@@ -207,7 +228,7 @@ class Character():
 
         return (sw_a_dict, sw_c_dict)
 
-    def get_epic_status(self, s_id, c_id):
+    def get_epic_status(self, s_id, c_id, _cur_list = None):
         mon_end = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
         #fix: 2021 prepare
         today = datetime.datetime.today()
@@ -217,20 +238,34 @@ class Character():
 
         thishour = today.hour
         thismin = today.minute
+        isEnd = False
 
-        cur_list = {'지옥파티':0, '에픽':0, '신화':0, '시로코':0, '신화목록':{}, '에픽목록':{}, '시로코목록':{}}
+        if _cur_list is not None:
+            cur_list = _cur_list
+        else:
+            cur_list = {'지옥파티':0, '에픽':0, '신화':0, '시로코':0, '신화목록':{}, '에픽목록':{}, '시로코목록':{}}
+
         for year in range(2020, thisyear+1):
-            for mon in range(1, thismon+1):
+            for mon in range(1, 13):
+                if isEnd is True:
+                    break
+
                 _startDate = datetime.date(year, mon, 1)
                 if year == 2020 and mon == 1:
                     _startDate = _startDate.replace(day=9)
                     
                 startDate = str(_startDate).replace('-','')+'T0000'
 
-                _endDate = datetime.date(year, mon, mon_end[mon-1])
-                if mon == thismon:
+                _mon_end = mon_end[mon-1]
+
+                if year % 4 != 0 and mon == 2:
+                    _mon_end -= 1
+
+                _endDate = datetime.date(year, mon, _mon_end)
+                if mon == thismon and year == thisyear:
                     _endDate = _endDate.replace(day=thisday)
                     endTime = 'T'+str(thishour).zfill(2)+str(thismin).zfill(2)
+                    isEnd = True
                 else:
                     endTime = 'T2359'
 
@@ -238,7 +273,7 @@ class Character():
 
                 order = year*100 + mon
                 
-                url = 'servers/'+s_id+'/characters/'+c_id+'/timeline?limit=100&code=504,505,507,513&startDate='+startDate+'&endDate='+endDate+'&'
+                url = 'servers/'+s_id+'/characters/'+c_id+'/timeline?limit=100&code=504,505,507,513,518&startDate='+startDate+'&endDate='+endDate+'&'
                 while (url is not None):
                     try:
                         tresult = myutil.load_api(url)
@@ -247,7 +282,6 @@ class Character():
                         raise
                     
                     if len(tresult['timeline']['rows']) > 0:
-
                         for entry in tresult['timeline']['rows']:
                             code = entry['code']
                             edata = entry['data']
@@ -257,11 +291,19 @@ class Character():
                             iname = edata['itemName']
                             dname = edata.get('dungeonName')
 
-                            if ir in ['신화' , '에픽']:
+                            if iname == '무형의 잔향':
+                                cur_list['시로코'] += 1
+                                if '무형의 잔향' in cur_list['시로코목록'].keys():
+                                    cur_list['시로코목록']['무형의 잔향']['count'] += 1
+                                    cur_list['시로코목록']['무형의 잔향']['code'].append(code)
+                                else:
+                                    cur_list['시로코목록']['무형의 잔향'] = {'id':iid, 'count':1, 'code':[code]}
+
+                            elif ir in ['신화' , '에픽']:
                                 if code == 505 and dname == '지혜의 인도':
                                     cur_list['지옥파티'] += 10
 
-                                if iname[0:4] not in ['무형 : ', '무의식 :', '환영 : ']:
+                                if iname.find('무형 :') < 0 and iname.find('무의식 :') < 0 and iname.find('환영 :') < 0:
                                     cur_list[ir] += 1
                                 else:
                                     cur_list['시로코'] += 1
@@ -293,28 +335,41 @@ class Character():
                         url = 'servers/'+s_id+'/characters/'+c_id+'/timeline?next='+lnext+'&'
                     else:
                         url = None
+                        
+                if mon == thismon and year == thisyear:
+                    break
+
         if self.test_mode is True:
             with open('epictree.json', 'w') as f:
                 json.dump(cur_list, f)
         
         return cur_list
 
-    def do_create_char_dict(self, epic_status):
+    def do_create_char_dict(self, epic_status, custom_data, squad_data = None):
         character = self
 
         classid = character.classid
         jobid = character.jobid
         s_id = character.sid
         cha_id = character.cid
+        noclass = character.char_stat.get('noclass')
         
-        if epic_status is True:
+        if epic_status is True and noclass is None:
             character.epic_status = self.get_epic_status(s_id, cha_id)
         else:
             character.epic_status = None
    
         #self.logger.info('start analyze :' + character.name + ' ' + character.server)
 
-        character.char_stat['inventory'].create_equip_info()
+        if custom_data is not None:
+            character.char_stat['inventory'].create_equip_from_custom(custom_data)
+        else:
+            character.char_stat['inventory'].create_equip_info()
+
+        if noclass is not None:
+            character.char_stat['장비'] = character.char_stat['inventory'].equip_info
+            return
+
         character.inner_data['main_siroco'] = character.char_stat['inventory'].extra_info['siroco']
         character.char_stat['inventory'].build_item_db_list()
         if character.buffer is not None:
@@ -333,26 +388,264 @@ class Character():
                     character.epic_status['신화'] += 1
             
         character.char_stat['inventory'].handle_item_options()
+        for name, stat in character.char_stat['inventory'].istatus.items():
+            for slot, item in character.char_stat['inventory'].equip_info.items():
+                if item['name'] == name:
+                    item['status'] = stat
+
+        if character.char_stat['char_type'] == '시너지':
+            character.char_stat['inventory'].sops.append({'시너지':34})
+
+        final_synergy = {}
+        for ops in character.char_stat['inventory'].sops:
+            _k = list(ops.keys())[0]
+            v = list(ops.values())[0]
+
+            if _k in ['깡스탯', '힘지깡']:
+                k = '스탯'
+            else:
+                k = _k
+
+            if k not in final_synergy.keys():
+                if k.find('시너지스공') >= 0:
+                    final_synergy[k] = (1 + v/100)
+                else:
+                    final_synergy[k] = v
+            else:
+                if k.find('시너지스공') >= 0:
+                    final_synergy[k] *= (1 + v/100)
+                else:
+                    final_synergy[k] += v
+
+        if character.char_stat['char_type'] != '버퍼':
+            character.char_stat['시너지옵션'] = final_synergy
+
+        for name, ops in character.char_stat['inventory'].iops.items():
+            if (name.find('시로코') >= 0 and name.find('[시로코]') < 0) or (name.find('오즈마융합') >= 0):
+                args = name.split('-')
+                key = args[1]
+
+                if args[0] == '시로코1':
+                    subkey = '1'
+                elif args[0] == '시로코2':
+                    subkey = '2'
+                else:
+                    subkey = 'ozma'
+
+                item = character.char_stat['inventory'].equip_info[key]
+                for op in ops:
+                    item['data']['siroco'][subkey].append(op)
+            elif name.find('신화') >= 0:
+                key = '신화'
+                for item in character.char_stat['inventory'].equip_info.values():
+                    if item['등급'] == '신화':
+                        for op in ops:
+                            item['data']['myth'].append(op)
+                        break
+            elif name.find('변환') >= 0:
+                args = name.split('-')
+                key = args[1]
+                
+                item = character.char_stat['inventory'].equip_info[key]
+                for op in ops:
+                    item['data']['transform'].append(op)
+            else:
+                for op in ops:
+                    if len(op) == 2:
+                        for slot, item in character.char_stat['inventory'].equip_info.items():
+                            if item['name'] == name:
+                                item['data']['options'].append(op)
+                    else:
+                        for slot, item in character.char_stat['inventory'].equip_info.items():
+                            if item['name'] == name:
+                                item['data']['stats'].append(op)
+
+        for name, ops in character.char_stat['inventory'].buff_iops.items():
+            #print (name, ops)
+            if (name.find('시로코') >= 0 and name.find('[시로코]') < 0) or (name.find('오즈마융합') >= 0):
+                args = name.split('-')
+                key = args[1]
+
+                if args[0] == '시로코1':
+                    subkey = '1'
+                elif args[0] == '시로코2':
+                    subkey = '2'
+                else:
+                    subkey = 'ozma'
+
+                item = character.char_stat['inventory'].equip_info[key]
+                for op in ops:
+                    item['data']['buffsiroco'][subkey].append(op)
+            elif name.find('신화') >= 0:
+                key = '신화'
+                for item in character.char_stat['inventory'].equip_info.values():
+                    if item['등급'] == '신화':
+                        for op in ops:
+                            item['data']['buffmyth'].append(op)
+                        break
+            elif name.find('변환') >= 0:
+                args = name.split('-')
+                key = args[1]
+
+                item = character.char_stat['inventory'].equip_info[key]
+                for op in ops:
+                    item['data']['bufftransform'].append(op)
+            else:
+                for op in ops:
+                    if len(op) == 2:
+                        for slot, item in character.char_stat['inventory'].equip_info.items():
+                            if item['name'] == name:
+                                item['data']['buffoptions'].append(op)
+
         if character.buffer is not None:
             character.buffer['inventory'].handle_item_options()
+            for name, ops in character.buffer['inventory'].iops.items():
+                if (name.find('시로코') >= 0 and name.find('[시로코]') < 0) or (name.find('오즈마융합') >= 0):
+                    args = name.split('-')
+                    key = args[1]
+
+                    if args[0] == '시로코1':
+                        subkey = '1'
+                    elif args[0] == '시로코2':
+                        subkey = '2'
+                    else:
+                        subkey = 'ozma'
+
+                    item = character.buffer['inventory'].equip_info[key]
+                    for op in ops:
+                        item['data']['siroco'][subkey].append(op)
+
+                elif name.find('신화') >= 0:
+                    key = '신화'
+                    for item in character.buffer['inventory'].equip_info.values():
+                        if item['등급'] == '신화':
+                            for op in ops:
+                                item['data']['myth'].append(op)
+
+                elif name.find('변환') >= 0:
+                    args = name.split('-')
+                    key = args[1]
+                    
+                    item = character.buffer['inventory'].equip_info[key]
+                    for op in ops:
+                        item['data']['transform'].append(op)
+
+                else:
+                    for op in ops:
+                        if len(op) == 2:
+                            for slot, item in character.buffer['inventory'].equip_info.items():
+                                if item['name'] == name:
+                                    item['data']['options'].append(op)
+
+                        else:
+                            for slot, item in character.buffer['inventory'].equip_info.items():
+                                if item['name'] == name:
+                                    item['data']['stats'].append(op)
+
+            for name, ops in character.buffer['inventory'].buff_iops.items():
+                if (name.find('시로코') >= 0 and name.find('[시로코]') < 0) or (name.find('오즈마융합') >= 0):
+                    args = name.split('-')
+                    key = args[1]
+
+                    if args[0] == '시로코1':
+                        subkey = '1'
+                    elif args[0] == '시로코2':
+                        subkey = '2'
+                    else:
+                        subkey = 'ozma'
+
+                    item = character.buffer['inventory'].equip_info[key]
+                    for op in ops:
+                        item['data']['buffsiroco'][subkey].append(op)
+                elif name.find('신화') >= 0:
+                    key = '신화'
+                    for item in character.buffer['inventory'].equip_info.values():
+                        if item['등급'] == '신화':
+                            for op in ops:
+                                item['data']['buffmyth'].append(op)
+                            break
+
+                elif name.find('변환') >= 0:
+                    args = name.split('-')
+                    key = args[1]
+                    
+                    item = character.buffer['inventory'].equip_info[key]
+                    for op in ops:
+                        item['data']['bufftransform'].append(op)
+
+                else:
+                    for op in ops:
+                        if len(op) == 2:
+                            for slot, item in character.buffer['inventory'].equip_info.items():
+                                if item['name'] == name:
+                                    item['data']['buffoptions'].append(op)
+
+
 
         character.char_stat['skilltree'].handle_special_case()
+
+        if squad_data is not None:
+            bless = squad_data['bless']
+            apo = squad_data['apo']
+            dam = squad_data['dam']
+            synergy = squad_data['synergy']
+        else:
+            bless = 18000
+            apo = 17000
+            dam = 2000
+            synergy = None
 
         #던전 속성       
         d_info = {}
         d_info['name'] = '시로코'
+        #d_info['지역버프'] = {'factor':2.31, 'inc':3980}
         d_info['지역버프'] = {'factor':2.334, 'inc':4397}
-        d_info['축스탯'] = 18000
-        d_info['아포스탯'] = 17000
-        d_info['축공격력'] = 2000
+        d_info['축스탯'] = bless
+        d_info['아포스탯'] = apo
+        d_info['축공격력'] = dam
         d_info['버퍼속저깍'] = 60
         d_info['몹속저'] = 50
         d_info['비진각보정'] = 1.15
         d_info['공격유형'] = {}
-        d_info['공격유형']['지속딜']=  {'시간':70, '방어력':99.8, '반영스탯':['축스탯'], '계산식':'지속딜*1.7+그로기딜*0.5', '정령왕':1.10, '반영률':0.8, '제외스킬':[50, 85, 100]}
-        d_info['공격유형']['그로기딜'] = {'시간':25., '방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'그로기딜*2', '정령왕':1.16, '반영률':1, '제외스킬': None}
+        d_info['공격유형']['지속딜']=  {'시간':40, '방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'지속딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':1}
+        d_info['공격유형']['지속정자극딜']=  {'시간':40, '쿨감':20, '방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'지속정자극딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':1}
+        d_info['공격유형']['그로기딜'] = {'시간':25, '방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'그로기딜*2', '정령왕':1.16, '반영률':1, '제외스킬': None, '가동률':1}
+        d_info['공격유형']['정자극딜'] = {'시간':25, '쿨감':20, '방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'정자극딜*2', '정령왕':1.16, '반영률':1, '제외스킬': None, '가동률':1}
+        d_info['공격유형']['80초딜'] = {'시간':80,'방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'80초딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':0.95}
+        d_info['공격유형']['60초딜'] = {'시간':60,'방어력':99.6, '반영스탯':['축스탯', '아포스탯'], '계산식':'60초딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':0.97}
 
-        character.char_stat['skilltree'].calculate_deal(d_info)
+        character.char_stat['skilltree'].calculate_deal(d_info, synergy)
+
+        if squad_data is not None:
+            bless = squad_data['bless']
+            apo = squad_data['apo']
+            dam = squad_data['dam']
+            synergy = squad_data['synergy']
+        else:
+            bless = 28000
+            apo = 27000
+            dam = 2500
+            synergy = None
+
+        d_info = {}
+        d_info['name'] = '오즈마'
+        #d_info['지역버프'] = {'factor':2.334, 'inc':4397}
+        d_info['지역버프'] = {'factor':2.334, 'inc':4397}
+        d_info['축스탯'] = bless
+        d_info['아포스탯'] = apo
+        d_info['축공격력'] = dam
+        d_info['버퍼속저깍'] = 60
+        d_info['몹속저'] = 50
+        d_info['비진각보정'] = 1.15
+        d_info['공격유형'] = {}
+        d_info['공격유형']['40초딜']=  {'시간':40, '방어력':99.4, '반영스탯':['축스탯', '아포스탯'], '계산식':'40초딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':0.9, '추가딜증':1.25*1.2}
+        d_info['공격유형']['40초정자극딜']=  {'시간':40, '쿨감':20, '방어력':99.4, '반영스탯':['축스탯', '아포스탯'], '계산식':'40초정자극딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':0.9, '추가딜증':1.25*1.2}
+        d_info['공격유형']['240초딜']=  {'시간':240, '방어력':99.4, '반영스탯':['축스탯', '아포스탯'], '계산식':'240초딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':0.8}
+        d_info['공격유형']['240초정자극딜']=  {'시간':240, '쿨감':20, '방어력':99.4, '반영스탯':['축스탯', '아포스탯'], '계산식':'240초정자극딜*2', '정령왕':1.10, '반영률':1, '제외스킬': None, '가동률':0.8}
+
+        character.char_stat['skilltree'].calculate_deal(d_info, synergy)
+
+        character.char_stat['아이템속강증가'] = character.char_stat['inventory'].item_elem
 
         if character.buffer is not None:
             character.char_stat['버프분석결과'] = {}
@@ -372,12 +665,22 @@ class Character():
         if epic_status is True:
             character.char_stat['에픽획득'] = character.epic_status
 
+        main_stat = character.char_stat['main_stat']
+        b = character.char_stat[main_stat['type']]
+        a = main_stat['value']
+
+        main_stat['mastery'] = b - a
+
         if self.test_mode is True:
             with open("result.json", "w") as f:
                 json.dump(character.char_stat, f)
 
-    def __init__(self, cid, sid, test_mode = False):
+    def __init__(self, cid, sid, test_mode = False, custom_data = None):
         self.test_mode = test_mode
+ 
+        if cid is None and sid is None:
+            return None
+
         self.inner_data = {}
 
         try:
@@ -390,10 +693,6 @@ class Character():
         self.e_dict, self.c_dict, self.a_dict, self.g_dict, self.t_dict = raw_dicts[3:8]
 
         sw_dict = self.sw_dict
-        
-        if sw_dict['skill']['buff'] is None:
-            self.status = ('error', '버프강화 미지정')
-            return None
 
         self.name = sw_dict['characterName']
         self.server = sid_dict[sid]
@@ -406,6 +705,16 @@ class Character():
         self.cid = cid
         self.sid = sid
         
+        if sw_dict['skill']['buff'] is None:
+            self.status = ('error', '버프강화 미지정')
+            self.char_stat = {
+                    '레벨':self.level, '이름':self.name, '서버':self.server, '모험단':self.advname, 'class':self.classname, '전직':self.jobname, 'ids':(sid, cid), '버퍼여부':False, 'jobid':self.jobid, 'noclass': True, 'points': 0
+                }
+
+            self.char_stat['inventory'] = Inventory(self, self.e_dict, self.c_dict, self.a_dict, self.g_dict, self.t_dict, test_mode = self.test_mode, custom_data = None)
+            self.buffer = None
+            return None
+       
         if self.jobname[0] == '眞':
             self.classTypeNeo = True
         else:
@@ -432,6 +741,7 @@ class Character():
                 self.isBuffer = True
         else:
             self.buffer = None
+            #print (self.classid, self.jobid)
             cbuff = self.buff_dict[self.classid][self.jobid]
             self.isBuffer = False
 
@@ -439,13 +749,23 @@ class Character():
                 '레벨':self.level, '이름':self.name, '서버':self.server, '모험단':self.advname, 'class':self.classname, '전직':self.jobname, 'ids':(sid, cid), '버퍼여부':self.isBuffer, 'jobid':self.jobid,
                 '스공':1, '증댐':0, '크증댐':0, '추댐':0, '속추댐':0,
                 '물마독공':0, '힘지':0, '모공':0, '지속댐':0, '증추':0, '크증추':0,
-                '패시브':{}
+                '패시브':{}, '버프패시브':{}, '변환옵션':[], 'points': 0
             }
+        
+        #if test_mode is True:
+        for slot in self.e_dict['equipment']:
+            if 'skin' in slot.keys():
+                idx = self.e_dict['equipment'].index(slot)
+                del self.e_dict['equipment'][idx]['skin']
 
+        if custom_data is None:
+            self.analyze_stat()
+        else:
+            self.analyze_stat(custom_data['diff'])
+            custom_data['char_stat'] = self.char_stat
         self.analyze_sw(cbuff)
-        self.analyze_stat()
 
-        self.char_stat['inventory'] = Inventory(self.e_dict, self.c_dict, self.a_dict, self.g_dict, self.t_dict, self.test_mode)
+        self.char_stat['inventory'] = Inventory(self, self.e_dict, self.c_dict, self.a_dict, self.g_dict, self.t_dict, test_mode = self.test_mode, custom_data = custom_data)
         self.char_stat['skilltree'] = SkillTree(self, self.test_mode)
         self.char_stat['inventory'].bind_skill(self.char_stat['skilltree'])
         self.char_stat['inventory'].analyze_enchants()
@@ -455,7 +775,62 @@ class Character():
         #print('마부/아바타/젬 지능', v)
         v = self.calculate_base_stat(v, typ) + self.base_stat
         self.char_stat['inventory'].main_stat = {'type':typ, 'value':v}
+
+        #self.char_stat['enchants']
+        invest = self.char_stat['inventory'].enchant
+
+        self.char_stat['invest'] = invest
+        self.char_stat['main_stat'] = self.char_stat['inventory'].main_stat
+
+        if self.isBuffer is False:
+            elem_enchants = invest['elem']
+
+            maxv = max(elem_enchants.values())
+            for e, v in elem_enchants.items():
+                if v == maxv:
+                    maxe = e
+
+            if maxe == '모든 속성 강화':
+                vsum = elem_enchants[maxe]
+                maxv = 0
+                _maxe = maxe
+                for e, v in elem_enchants.items():
+                    if e == _maxe:
+                        continue
+
+                    if v > maxv:
+                        maxv = v
+                        maxe = e
+                
+                vsum += int(maxv / 2)
+
+                p = (float(vsum) / 124.0) * 100
+            else:
+                vsum = maxv + elem_enchants['모든 속성 강화']
+
+                p = (float(vsum) / 138.0) * 100
+
+            stat_enchants = invest['stat']
+
+            maxv = max(stat_enchants.values())
+
+            p += (float(maxv) / 800) * 100
+
+            dam_enchants = invest['dam']
+
+            maxv = max(dam_enchants.values())
+
+            p += (float(maxv) / 240) * 100
         
+        else: #buffer enchant point
+            stat_enchants = invest['stat']
+
+            maxv = max(stat_enchants.values())
+
+            p = (float(maxv + 1600) / 3200) * 365
+
+        self.char_stat['points'] += p
+
         if self.buffer is not None:
             sw_a_dict, sw_c_dict = self.get_sw_dicts(sid, cid)
             sw_e_dict = self.sw_dict['skill']['buff']
@@ -497,7 +872,7 @@ class Character():
 
             buff30_base, buff50_base, buff_name, apo_name, passive_name, buff_aura_name = self.get_buff_info()
  
-            self.buffer['inventory'] = Inventory(sw_e_dict, sw_c_dict, sw_a_dict, self.g_dict, self.t_dict)
+            self.buffer['inventory'] = Inventory(self, sw_e_dict, sw_c_dict, sw_a_dict, self.g_dict, self.t_dict)
             self.buffer['skilltree'] = SkillTree(self, self.test_mode)
             self.buffer['inventory'].bind_skill(self.buffer['skilltree'])
             self.buffer['inventory'].analyze_enchants()
@@ -514,6 +889,21 @@ class Character():
 
         self.char_stat['inventory'].analyze_talisman()
 
+        self.char_stat['dicts'] = {
+            'equipment': self.e_dict['equipment'],
+            'setInfo': self.e_dict['setItemInfo'],
+            'creature': self.c_dict['creature'],
+            'avatar': self.a_dict['avatar'],
+            'flag': self.g_dict['flag'],
+            'talismans': self.t_dict['talismans']
+        }
+        if self.buffer is not None:
+            self.char_stat['dicts'].update({
+                'sw_equipment': sw_e_dict['equipment'],
+                'sw_setInfo': sw_e_dict['setItemInfo'],
+                'sw_avatar': sw_a_dict['avatar'],
+            })
+
         self.status = ('ok', None)
 
     def calculate_buff_score(self):
@@ -527,20 +917,23 @@ class Character():
 
         bless_stat = self.char_stat['버프분석결과']['축']['힘지']['value']
         awk_stat = self.char_stat['버프분석결과']['아포']['value']
+        awk_stat2 = self.char_stat['버프분석결과']['아포']['value2']
 
         final_stat = bless_stat + awk_stat + add_stat
+        final_stat2 = bless_stat + awk_stat2 + add_stat
 
         final_dam = self.char_stat['버프분석결과']['축']['공']['value']
         final_dam += add_dam
 
         # for scoring
-        bless_stat += add_stat
-        awk_stat += add_stat
+        #bless_stat += add_stat
+        #awk_stat += add_stat
                 
-        deal_ori = 1.31 * (1 + 15983/250) * 2600 * 1.34 * 1.5 * 0.004
-        deal = 1.31 * (1+ (15983+ final_stat)/250) * (2600 + final_dam) * 1.34 * 1.5 * 0.004
+        deal_ori = 1.31 * (1 + 15750/250) * 2500 * 1.34 * 1.5 * 0.004
+        deal = 1.31 * (1+ (15750+ final_stat)/250) * (2500 + final_dam) * 1.34 * 1.5 * 0.004
 
-        a_deal = 1.31 * (1+ (15983+ awk_stat)/250) * (2600 + final_dam) * 1.34 * 1.5 * 0.004
+        """
+        a_deal = 1.31 * (1+ (15983+ awk_stat)/250) * (2500 + final_dam) * 1.34 * 1.5 * 0.004
 
         if self.classname == '프리스트(여)':
             c_deal = 1.31 * (1+ (15983+ (bless_stat * 0.95))/250) * (2600 + final_dam) * 1.34 * 1.5 * 0.004
@@ -548,24 +941,236 @@ class Character():
             c_deal = 1.31 * (1+ (15983+ (bless_stat * 0.95))/250) * (2600 + final_dam) * 1.34 * 1.5 * 0.004
         else:
             c_deal = 1.31 * (1+ (15983+ (bless_stat * 0.975))/250) * (2600 + final_dam) * 1.34 * 1.5 * 0.004
+        """
 
         dealp = (deal/100 - 100)
 
         deal_amp_base = deal/deal_ori
-        deal_amp = round(((deal/deal_ori * 100) - 100) * 700)
 
-        cdeal_amp_base = c_deal/deal_ori
-        cdeal_amp = round(((c_deal/deal_ori * 100) - 100) * 700)
+        #print (deal_amp_base * 1.6)
 
-        adeal_amp_base = a_deal/deal_ori
-        adeal_amp = round(((a_deal/deal_ori * 100) - 100) * 700)
+        #cdeal_amp_base = c_deal/deal_ori
+        #cdeal_amp = round(((c_deal/deal_ori * 100) - 100) * 700)
 
-        final_score = deal_amp
-        c_score = cdeal_amp
-        g_score = adeal_amp
+        #adeal_amp_base = a_deal/deal_ori
+        #adeal_amp = round(((a_deal/deal_ori * 100) - 100) * 700)
 
-        self.char_stat['버프분석결과']['점수표'] = (c_score, g_score, final_score, dealp, deal)
+        if self.char_stat['inventory'].extra_info['siroco_roxy'] != 0:
+            fdam = (final_dam + 2650) * (1 + self.char_stat['inventory'].extra_info['siroco_roxy'] / 100)
+        else:
+            fdam = final_dam + 2650
+
+        final_score = round((1 + (15000 + final_stat) / 250) * fdam / 10)
+        final_score2 = round((1 + (15000 + final_stat2) / 250) * fdam / 10)
+
+        bless_only_stat = bless_stat + add_stat
+        bless_score = round((1 + (15000 + bless_only_stat) / 250) * fdam / 10)
+
+        self.char_stat['버프분석결과']['점수표'] = (final_score, dealp, deal, final_score2, bless_score)
         self.char_stat['버프분석결과']['최종버프'] = {'공격력':round(final_dam), '힘/지능':round(final_stat)}
+
+        vsum = (final_score * 2.5 + bless_score * 1.5)/3
+
+        namep = self.char_stat.get('모험가명성')
+        if namep is not None:
+            self.char_stat['points'] = (namep-6068)/15
+
+        self.char_stat['points'] += vsum / 200
+
+    def deal_to_text(self, g_real_deal):
+        g_jo_real = int(g_real_deal / 100000000000000)
+        g_2nd_real = int((g_real_deal % 100000000000000)/10000000000) 
+            
+        if g_jo_real > 0:
+            return str(g_jo_real)+'조 '+str(g_2nd_real)+'억'
+        else:
+            return str(g_2nd_real)+'억'
+
+    def create_epic_report(self, epic_status, prefix, postfix, isBuffer, siroco_status):
+        myth_count = epic_status['신화']
+        epic_count = epic_status['에픽']
+        indo_count = epic_status['지옥파티']
+        myth_list = epic_status['신화목록']
+        siroco_list = epic_status['시로코목록']
+        siroco_count = epic_status['시로코']
+
+        if siroco_count == 4 and siroco_status == 13:
+            prefix.append('차단이 필요한 시로코보상 기린')
+
+        if siroco_count >= 10 and siroco_status != 13:
+            if siroco_status == 3:
+                prefix.append('시로코보상운 없는')
+                postfix.append('잔향없찐')
+            elif (siroco_status % 10) < 3 and siroco_status >= 10:
+                prefix.append('시로코보상운 없는')
+                postfix.append('미졸업자')
+            else:
+                postfix.append('시로코 무료봉사자')
+            
+        #print('신화목록', myth_list)
+        if myth_count == 0:
+            if indo_count > 5000:
+                postfix.append('아직도 안접고 이걸 보는 대단한 찐신없찐')
+            elif indo_count > 4000:
+                postfix.append('아무신화나 좀 나오라고 하는 신없찐')
+            elif indo_count > 3000:
+                postfix.append('분노에 가득찬 신없찐')
+            elif indo_count > 2000:
+                postfix.append('설마 안나오겠어? 생각하는 신없찐')
+            elif indo_count > 1000:
+                postfix.append('곧 먹을거라 생각하는 신없찐')
+            elif indo_count <= 1000:
+                postfix.append('아직은 괜찮은 신없찐')
+        
+        myth_tier = [0, 0, 0, 0, 0]
+
+        if isBuffer is False:
+            for myth in myth_list.keys():
+                if myth in ['고대 심연의 로브', '군신의 마지막 갈망', '영원한 나락의 다크버스']:
+                    myth_tier[0] += 1
+                elif myth in ['영원을 새긴 바다', '차원을 관통하는 초신성', '숙명을 뒤엎는 광란', '결속의 체인 플레이트', '길 방랑자의 물소 코트', '사탄 : 분노의 군주', '작열하는 대지의 용맹', '종말의 역전']:
+                    myth_tier[1] += 1
+                elif myth in ['낭만적인 선율의 왈츠', '영명한 세상의 순환', '또다른 시간의 흐름', '아린 고통의 비극']:
+                    myth_tier[4] += 1
+                elif myth in ['대제사장의 예복', '선택이익', '천사의 날개', '라이도 : 질서의 창조자', '시간을 거스르는 자침', '천지에 울려퍼지는 포효', '운명을 거스르는 자']:
+                    myth_tier[3] += 1
+                else:
+                    myth_tier[2] += 1
+        else:
+            for myth in myth_list.keys():
+                if myth in ['숙명을 뒤엎는 광란', '영원히 끝나지 않는 탐구']:
+                    myth_tier[0] += 1
+                elif myth in ['영원한 나락의 다크버스', '천지에 울려퍼지는 포효', '고대 심연의 로브', '차원을 관통하는 초신성', '수석 집행관의 코트', '시간을 거스르는 자침', '아린 고통의 비극', '새벽을 녹이는 따스함']:
+                    myth_tier[1] += 1
+                elif myth in ['작열하는 대지의 용맹', '결속의 체인 플레이트', '대 마법사[???]의 로브']:
+                    myth_tier[4] += 1
+                elif myth in ['생사를 다스리는 그림자의 재킷', '또다른 시간의 흐름', '천사의 날개', '최후의 전술', '웨어러블 아크 팩']:
+                    myth_tier[3] += 1
+                else:
+                    myth_tier[2] += 1
+
+        if myth_tier[0] > 0:
+            old_max_tier = 1
+        elif myth_tier[1] > 0:
+            old_max_tier = 2
+        elif myth_tier[2] > 0:
+            old_max_tier = 3
+        elif myth_tier[3] > 0:
+            old_max_tier = 4
+        elif myth_tier[4] > 0:
+            old_max_tier = 5
+        else:
+            old_max_tier = 0
+        
+        new_myth_tier = [0, 0, 0, 0, 0]
+
+        if isBuffer is False:
+            for myth in myth_list.keys():
+                if myth in ['군신의 마지막 갈망', '영원한 나락의 다크버스', '종말의 역전', '트로피카 : 드레이크', '영원히 끝나지 않는 탐구']:
+                    new_myth_tier[0] += 1
+                elif myth in ['또다른 시간의 흐름', '시간을 거스르는 자침', '고대 심연의 로브', '영원을 새긴 바다', '숙명을 뒤엎는 광란', '사탄 : 분노의 군주', '작열하는 대지의 용맹', '낭만적인 선율의 왈츠', '천지에 울려퍼지는 포효']:
+                    new_myth_tier[1] += 1
+                elif myth in ['영명한 세상의 순환', '아린 고통의 비극', '천사의 날개', '수석 집행관의 코트', '최후의 전술']:
+                    new_myth_tier[4] += 1
+                elif myth in ['대제사장의 예복', '라이도 : 질서의 창조자', '운명을 거스르는 자', '새벽을 녹이는 따스함', '길 방랑자의 물소 코트', '웨어러블 아크 팩', '대 마법사[???]의 로브', '플라즈마 초 진공관']:
+                    new_myth_tier[3] += 1
+                else:
+                    new_myth_tier[2] += 1
+        else:
+            for myth in myth_list.keys():
+                if myth in ['숙명을 뒤엎는 광란', '영원히 끝나지 않는 탐구', '천지에 울려퍼지는 포효', '영원한 나락의 다크버스']:
+                    new_myth_tier[0] += 1
+                elif myth in ['고대 심연의 로브', '차원을 관통하는 초신성', '시간을 거스르는 자침', '아린 고통의 비극', '새벽을 녹이는 따스함', '운명을 거스르는 자', '수석 집행관의 코트']:
+                    new_myth_tier[1] += 1
+                elif myth in ['트로피카 : 드레이크', '작열하는 대지의 용맹', '결속의 체인 플레이트', '대 마법사[???]의 로브', '길 방랑자의 물소 코트', '영명한 세상의 순환', '선택이익']:
+                    new_myth_tier[3] += 1
+                elif myth in ['생사를 다스리는 그림자의 재킷', '선택이익', '천사의 날개', '웨어러블 아크 팩']:
+                    new_myth_tier[4] += 1
+                else:
+                    new_myth_tier[2] += 1
+
+        myth_tier = new_myth_tier
+
+        if myth_tier[0] > 0:
+            new_max_tier = 1
+        elif myth_tier[1] > 0:
+            new_max_tier = 2
+        elif myth_tier[2] > 0:
+            new_max_tier = 3
+        elif myth_tier[3] > 0:
+            new_max_tier = 4
+        elif myth_tier[4] > 0:
+            new_max_tier = 5
+        else:
+            new_max_tier = 0
+
+        if indo_count < 800 and myth_count >= 1:
+            giraffe = False
+            for myth, myth_info in myth_list.items():
+                if 505 in myth_info['code']:
+                    giraffe = True
+                    break
+
+            if giraffe is True:
+                if sum(myth_tier[0:2]) > 0:
+                    prefix.append('차단이 필요한 신화기린')
+            else:
+                if sum(myth_tier[0:2]) > 0:
+                    prefix.append('기도메타 성공한')
+                else:
+                    prefix.append('기도메타 실패한')
+
+        if old_max_tier - new_max_tier > 1:
+            prefix.append('신화 인생 역전한')
+        elif old_max_tier - new_max_tier > 0:
+            prefix.append('신화 존버 성공한')
+
+        if indo_count >= 5000:
+            prefix.append('지혜의 인도에 녹아버린')
+        elif indo_count >= 4000:
+            prefix.append('지혜의 인도에 미쳐버린')
+        elif indo_count >= 3000:
+            prefix.append('지혜의 인도가 지겨운')
+        elif indo_count >= 2000:
+            prefix.append('지혜의 인도에 빠진')
+
+        if sum(myth_tier[0:2]) > 0:
+            postfix.append('상급신화 보유자')
+        elif sum(myth_tier[2:4]) > 0:
+            postfix.append('중급신화 보유자')
+        elif myth_tier[4] > 0:  
+            postfix.append('하급신화 보유자')
+
+        if myth_count >= 5:
+            postfix.append('신화돼지') 
+    
+    def create_report_explain(self, prefix, postfix, report, server, isBuffer, dealp, deal_jo, deal_uk, report_inc, report_type):
+        pcharname = '???'
+
+        if len(postfix) == 0:
+            if isBuffer is True:
+                postfix.append('버퍼')
+            else:
+                if self.classTypeNeo is True:
+                    postfix.append('딜러')
+                else:
+                    postfix.append('아무거나')
+
+        prefix_text = ', '.join(prefix)
+        postfix_text = ', '.join(postfix)
+
+
+        if isBuffer is False:
+            report_text = prefix_text + ' ' + server + ' - ' + pcharname +'은(는) ' + postfix_text + ' 입니다.' #  + deal_text
+        else:
+            if deal_jo >= 1:
+                d_text = str(deal_jo) + '조 '+ str(deal_uk)
+            else:
+                d_text = str(deal_uk)
+            
+            report_text = prefix_text +' '+ server + ' - ' + pcharname + '은(는) '+ postfix_text + '이며 시로코1시 1조 딜러의 딜을 '+ d_text +'억으로 ' + str(round(abs(dealp), 2)) +'% '+report_inc+'시켜 ' + report_type
+
+        report['explain'] = {'full': report_text, 'prefix': prefix, 'postfix': postfix, 'misc':(dealp, deal_jo, deal_uk, report_inc, report_type)}
 
     def create_report(self):
         prefix = []
@@ -578,6 +1183,69 @@ class Character():
         epic_status = self.epic_status
         char_stat = self.char_stat
         server = self.server
+
+        synergy = char_stat.get('시너지옵션')
+
+        if synergy is not None and len(synergy) > 1 and isBuffer is False:
+            dam_arr = {'스공':0}
+            for key in ['증댐', '크증댐', '추댐', '모공', '물마독공', '힘지']:
+                dam_arr[key] = 95
+
+            ori_inc = 1
+
+            for val in dam_arr.values():
+                ori_inc *= (1 + val / 100)
+
+            nos_inc = 1
+            inc = 1
+            stat = 0
+
+            for k, v in synergy.items():
+                if k == '시너지스공':
+                    inc *= v
+                elif k == '스탯':
+                    stat += v
+                elif k == '시너지':
+                    pass
+                elif k == '증추':
+                    dam_arr['증댐'] += v
+                elif k == '크증추':
+                    dam_arr['크증댐'] += v
+                else:
+                    try:
+                        dam_arr[k] += v
+                    except:
+                        pass
+
+            for k, val in dam_arr.items():
+                inc *= (1 + val / 100)
+                nos_inc *= (1 + val / 100)
+            
+            deal_ori = (1 + 50000/250) * ori_inc
+            deal = (1 + (50000 + stat)/250) * inc
+            deal_nos = (1 + (50000 + stat)/250) * nos_inc
+
+            sinc = str(round((deal/deal_ori - 1)*100, 2)) + '%'
+            dinc = str(round((deal_nos/deal_ori - 1) * 100, 2)) + '%'
+
+            #print (sinc, dinc)
+            char_stat['시너지력'] = {'딜러': dinc, '시너지': sinc}
+
+            """
+            print(nos_inc/ori_inc)
+
+            final_score = round((1 + (85000) / 250) * (5650 / 10))
+            final_score2 = round((1 + (85000 + stat) / 250) * (5650 * (nos_inc/ori_inc)) / 10)
+
+            final_score = round((1 + (50000) / 250) * (4650 / 10))
+            final_score2 = round((1 + (50000 + stat) / 250) * (4650 * (nos_inc/ori_inc)) / 10)
+
+
+            #final_score2 = round((1 + (15000 + stat) / 250) * fdam / 10)
+
+            print(final_score2 / final_score)
+            """
+
 
         if isBuffer is False:
             dam_arr = {}
@@ -609,13 +1277,16 @@ class Character():
 
             report['옵션밸런스'] = round(100 - dam_std, 2)
 
+            si = None
             if self.classTypeNeo is True:
                 awkact = skilltree.skill_enchant['100']
-                si = awkact['actives'][0]
-                blv = 2
-                mfact = 1.7
-                afact = 1.5
-            else:
+                if len(awkact['actives']) > 0:
+                    si = awkact['actives'][0]
+                    blv = 2
+                    mfact = 2.1
+                    afact = 1.8
+                
+            if si is None:
                 awkact = skilltree.skill_enchant['85']
                 si = awkact['actives'][0]
                 blv = 3
@@ -636,7 +1307,7 @@ class Character():
             elif act_cool_mean <= 0.64:
                 postfix.append('쿨감 변태')
 
-            if self.char_stat['속강딜증가'] > 230:
+            if self.char_stat.get('속강딜증가') > 230:
                 postfix.append('속강빌런')
         
             if self.char_stat['공격속도'] < 80:
@@ -654,35 +1325,44 @@ class Character():
 
             g_real_deal = self.char_stat['시로코분석결과']['그로기딜']['총합딜']
      
-            g_jo_real = int(g_real_deal / 100000000000000)
-            g_2nd_real = int((g_real_deal % 100000000000000)/10000000000) 
-            
-            if g_jo_real > 0:
-                g_text = str(g_jo_real)+'조 '+str(g_2nd_real)+'억'
-            else:
-                g_text = str(g_2nd_real)+'억'
-
             report['시로코1시딜'] = g_real_deal
-            deal_text = '시로코 1시 그로기딜(25초)은 ' + g_text +' 입니다.'
 
             g_score = self.char_stat['시로코분석결과']['그로기딜']['점수']
             c_score = self.char_stat['시로코분석결과']['지속딜']['점수']
             report['점수표'] = self.char_stat['시로코분석결과']['점수표']
+            report['오즈마점수표'] = self.char_stat['오즈마분석결과']['점수표']
 
-            if g_score > c_score*1.05*0.85:
+            report['점수표']['총점'] = round(g_real_deal)
+            report['점수표']['text'] = self.deal_to_text(g_real_deal)
+            report['점수표']['25c'] = self.deal_to_text(self.char_stat['시로코분석결과']['정자극딜']['총합딜'])
+            report['점수표']['40'] = self.deal_to_text(self.char_stat['시로코분석결과']['지속딜']['총합딜'])
+            report['점수표']['40c'] = self.deal_to_text(self.char_stat['시로코분석결과']['지속정자극딜']['총합딜'])
+
+            report['오즈마점수표']['no'] = self.deal_to_text(self.char_stat['오즈마분석결과']['40초딜']['총합딜'])
+            report['오즈마점수표']['yes'] = self.deal_to_text(self.char_stat['오즈마분석결과']['40초정자극딜']['총합딜'])
+
+            """
+            if g_score > c_score*1.05:
                 postfix.append('폭딜러')
-            elif g_score*1.05 < c_score*0.85:
+            elif g_score*1.05 < c_score:
                 postfix.append('지딜러')
             else:
                 postfix.append('멀티플레이어')
+            """
         else:
             buff30_dam = round(self.char_stat['버프분석결과']['축']['공']['value'])
             buff30_stat = round(self.char_stat['버프분석결과']['축']['힘지']['value'])
             if self.classname in ['마법사(여)', '프리스트(여)']:
                 add_stat = round(sum(list(self.char_stat['버프분석결과']['보조스킬'].values())))
             else:
-                add_stat = round(self.char_stat['버프분석결과']['보조스킬']['신념의 오라'])
-                add_dam = round(self.char_stat['버프분석결과']['보조스킬']['크로스 크래쉬'])
+                try:
+                    add_stat = round(self.char_stat['버프분석결과']['보조스킬']['신념의 오라'])
+                except:
+                    add_dam = 0
+                try:
+                    add_dam = round(self.char_stat['버프분석결과']['보조스킬']['크로스 크래쉬'])
+                except:
+                    add_dam = 0
             buff50_stat = round(self.char_stat['버프분석결과']['아포']['value'])
 
             if self.classname == '프리스트(여)':
@@ -723,7 +1403,7 @@ class Character():
 
             report['버프정보'] = (stat_icon_list, dam_icon_list, icon_info)
 
-            dealp = self.char_stat['버프분석결과']['점수표'][3]
+            dealp = self.char_stat['버프분석결과']['점수표'][1]
 
             if (dealp < 0):
                 report_inc = '감소'
@@ -757,13 +1437,16 @@ class Character():
                 elif 50 < dealp <= 60:
                     report_type = '신의 기운을 느끼게 합니다.'
                 elif 60 < dealp <= 80:
-                    report_type = '신이 곁에 있음을 깨닫게 합니다.'
+                    report_type = '신의 가호를 받게 합니다.'
                 elif 80 < dealp <= 100:
-                    report_type = '신의 힘을 갖게 합니다.'
-                elif 100 < dealp:
-                    report_type = '무신(武神)의 경지를 느낍니다.'
+                    report_type = '신의 능력을 갖게 합니다.'
+                elif 100 < dealp <= 120:
+                    report_type = '신과 대등한 힘을 부여합니다.'
+                elif 120 < dealp:
+                    report_type = '신을 초월한 존재를 만듭니다'
 
-            deal = self.char_stat['버프분석결과']['점수표'][4]
+
+            deal = self.char_stat['버프분석결과']['점수표'][2]
 
             deal_base = int(deal)/10000
             deal_jo = math.ceil(deal_base) - 1
@@ -772,10 +1455,24 @@ class Character():
             report['버프점수표'] = self.char_stat['버프분석결과']['점수표']
             
         wep_reinforce = inventory.weapon_info['reinforce']
-        avg_reinforce = inventory.inner_data['평균증폭수치']
+        avg_reinforce = inventory.inner_data['평균증폭수치'] 
         remodel_count = inventory.inner_data['산물장착수']
         high_remodel = inventory.inner_data['최대개조수치']
         max_reinforce = inventory.inner_data['최대증폭수치']
+
+        if isBuffer is True:
+            avg_reinforce += self.buffer['inventory'].inner_data['평균증폭수치']
+            avg_reinforce /= 2
+
+            max_reinforce = max(max_reinforce, self.buffer['inventory'].inner_data['최대증폭수치'])
+        else:
+            dealp = 0
+            deal_jo = 0
+            deal_uk = 0
+            report_inc = ''
+            report_type = ''
+
+        self.char_stat['avg_dim'] = avg_reinforce
 
         if 9 < avg_reinforce <= 10:
             prefix.append('증폭을 꿈꾸는')
@@ -800,7 +1497,7 @@ class Character():
         if max_reinforce == 13:
             postfix.append('증폭의 승리자')
         elif max_reinforce == 14:
-            postfix.append('증폭의 왕')
+            postfix.append('증폭의 정복자')
         elif max_reinforce == 15:
             postfix.append('증폭의 신')
 
@@ -814,130 +1511,9 @@ class Character():
 
         #epic_status
         if epic_status is not None:
-            myth_count = epic_status['신화']
-            epic_count = epic_status['에픽']
-            indo_count = epic_status['지옥파티']
-            myth_list = epic_status['신화목록']
-            #print('신화목록', myth_list)
-            if myth_count == 0:
-                if indo_count > 5000:
-                    postfix.append('아직도 안접고 이걸 보는 대단한 찐신없찐')
-                elif indo_count > 4000:
-                    postfix.append('아무신화나 좀 나오라고 하는 신없찐')
-                elif indo_count > 3000:
-                    postfix.append('분노에 가득찬 신없찐')
-                elif indo_count > 2000:
-                    postfix.append('설마 안나오겠어? 생각하는 신없찐')
-                elif indo_count > 1000:
-                    postfix.append('곧 먹을거라 생각하는 신없찐')
-                elif indo_count <= 1000:
-                    postfix.append('아직은 괜찮은 신없찐')
+            self.create_epic_report(epic_status, prefix, postfix, isBuffer, self.char_stat['siroco_status'])
 
-            myth_tier = [0, 0, 0, 0, 0]
-
-            if isBuffer is False:
-                for myth in myth_list.keys():
-                    if myth in ['고대 심연의 로브', '군신의 마지막 갈망', '영원한 나락의 다크버스']:
-                        myth_tier[0] += 1
-
-                    elif myth in ['영원을 새긴 바다', '차원을 관통하는 초신성', '숙명을 뒤엎는 광란', '결속의 체인 플레이트', '길 방랑자의 물소 코트', '사탄 : 분노의 군주', '작열하는 대지의 용맹', '종말의 역전']:
-                        myth_tier[1] += 1
-                    elif myth in ['낭만적인 선율의 왈츠', '영명한 세상의 순환', '또다른 시간의 흐름', '아린 고통의 비극']:
-                        myth_tier[4] += 1
-                    elif myth in ['대제사장의 예복', '선택이익', '천사의 날개', '라이도 : 질서의 창조자', '시간을 거스르는 자침', '천지에 울려퍼지는 포효', '운명을 거스르는 자']:
-                        myth_tier[3] += 1
-                    else:
-                        myth_tier[2] += 1
-            else:
-                for myth in myth_list.keys():
-                    if myth in ['숙명을 뒤엎는 광란', '영원히 끝나지 않는 탐구']:
-                        myth_tier[0] += 1
-
-                    elif myth in ['영원한 나락의 다크버스', '천지에 울려퍼지는 포효', '고대 심연의 로브', '차원을 관통하는 초신성', '수석 집행관의 코트', '시간을 거스르는 자침', '아린 고통의 비극', '새벽을 녹이는 따스함']:
-                        myth_tier[1] += 1
-                    elif myth in ['작열하는 대지의 용맹', '결속의 체인 플레이트', '대 마법사[???]의 로브']:
-                        myth_tier[4] += 1
-                    elif myth in ['생사를 다스리는 그림자의 재킷', '또다른 시간의 흐름', '천사의 날개', '최후의 전술', '웨어러블 아크 팩']:
-                        myth_tier[3] += 1
-                    else:
-                        myth_tier[2] += 1
-
-            if indo_count < 800 and myth_count >= 1:
-                giraffe = False
-                for myth, myth_info in myth_list.items():
-                    if 505 in myth_info['code']:
-                        giraffe = True
-                        break
-
-                if giraffe is True:
-                    if sum(myth_tier[0:2]) > 0:
-                        prefix.append('차단이 필요한 신화기린')
-                else:
-                    if sum(myth_tier[0:2]) > 0:
-                        prefix.append('기도메타 성공한')
-                    else:
-                        prefix.append('기도메타 실패한')
-
-            if indo_count >= 5000:
-                prefix.append('지혜의 인도에 녹아버린')
-            elif indo_count >= 4000:
-                prefix.append('지혜의 인도에 미쳐버린')
-            elif indo_count >= 3000:
-                prefix.append('지혜의 인도가 지겨운')
-            elif indo_count >= 2000:
-                prefix.append('지혜의 인도에 빠진')
-
-            if isBuffer is False:
-                if myth_tier[0] == 3:
-                    postfix.append('군심나를 다 가진 궁댕이맨')
-                elif myth_tier[0] >= 1:
-                    postfix.append('군심나의 선택을 받은자')
-                elif myth_tier[0] == 0 and myth_tier[1] > 0:
-                    postfix.append('신화메타 승리자')
-                elif sum(myth_tier[0:3]) == 0 and myth_tier[3] > 0:
-                    postfix.append('신화메타 실패자')
-                elif sum(myth_tier[0:4]) == 0 and myth_tier[4] > 0:
-                    postfix.append('흐무시아 오너')
-            else:
-                if myth_tier[0] >= 1:
-                    postfix.append('광흑의 선택을 받은자')
-                elif myth_tier[0] == 0 and myth_tier[1] > 0:
-                    postfix.append('신화메타 승리자')
-                elif sum(myth_tier[0:3]) == 0 and sum(myth_tier[3:]) > 0:
-                    postfix.append('신화메타 실패자')
-
-            if myth_count >= 5:
-                postfix.append('신화돼지') 
-
-        pcharname = '???'
-
-        if len(prefix) == 0:
-            prefix.append('특징없는')
-
-        if len(postfix) == 0:
-            if isBuffer is True:
-                postfix.append('평범한 버퍼')
-            else:
-                if self.classTypeNeo is True:
-                    postfix.append('평범한 딜러')
-                else:
-                    postfix.append('아무거나')
-
-        prefix_text = ', '.join(prefix)
-        postfix_text = ', '.join(postfix)
-
-
-        if isBuffer is False:
-            report_text = prefix_text + ' ' + server + ' - ' + pcharname +'은(는) ' + postfix_text + ' 이며, ' + deal_text
-        else:
-            if deal_jo >= 1:
-                d_text = str(deal_jo) + '조 '+ str(deal_uk)
-            else:
-                d_text = str(deal_uk)
-            
-            report_text = prefix_text +' '+ server + ' - ' + pcharname + '은(는) '+ postfix_text+'이며 시로코1시 1조 딜러의 딜을 '+ d_text +'억으로 ' + str(round(abs(dealp),2)) +'% '+report_inc+'시켜 ' + report_type       
-
-        report['explain'] = report_text
+        self.create_report_explain(prefix, postfix, report, server, isBuffer, dealp, deal_jo, deal_uk, report_inc, report_type)
 
         return report
 

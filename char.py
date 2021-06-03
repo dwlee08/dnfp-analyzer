@@ -28,12 +28,11 @@ def get_neople_ids(name, server):
     return s_id, cha_id
       
 def create_char_json(s_id, cha_id, test_mode = False, epic_status = False):
-    character = Character(cha_id, s_id, test_mode)
+    character = Character(cha_id, s_id, test_mode, custom_data = None)
     if character.status[0] != 'ok':
-        print (character.status[1])
         return character.status[1]
 
-    character.do_create_char_dict(epic_status)
+    character.do_create_char_dict(epic_status, None)
        
     return character.char_stat
 

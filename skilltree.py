@@ -2,6 +2,7 @@ from json import loads
 import json
 import numpy as np
 import math
+from statistics import mean
 #import re
 
 elem_type = ['화속성', '명속성', '수속성', '암속성']
@@ -41,7 +42,7 @@ class SkillTree():
         myskill_dict = self.owner.sk_dict['skill']['style']
         myskill_list = myskill_dict['active'] + myskill_dict['passive']
 
-        if self.owner.jobname in ['眞 메카닉','옵티머스']:
+        if self.owner.jobname == '眞 메카닉':
             if self.has_skill(myskill_list, '솔라 모듈 시스템'):
                 self.inner_data['skillpassive'] = (True, '스패로우 팩토리', '솔라 모듈 시스템')
             else:
@@ -71,7 +72,7 @@ class SkillTree():
                     if req == 50:
                         level += 1
      
-                    self.skill_enchant[str(req)]['skills'].append([skill, level, 0])
+                    self.skill_enchant[str(req)]['skills'].append([skill, level, 0, level])
       
         for myskill in myskill_list:
             skid = myskill['skillId']
@@ -95,7 +96,7 @@ class SkillTree():
                         'values':rlist, 'req':20
                         }
 
-                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0])
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
             elif name == '무기의 극의':
                 rlist = [0] + list(range(2, 40))
                 data = {
@@ -104,7 +105,7 @@ class SkillTree():
                         'values' : rlist, 'req':15
                         }
 
-                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0])
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
             elif name == '히트엔드':
                 rlist = [0] + list(range(81, 141, 2))
                 data = {
@@ -113,7 +114,7 @@ class SkillTree():
                         'values' : rlist, 'req':15
                         }
 
-                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0])
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
             elif name == '인법 : 잔영 남기기':
                 rlist = [0] + list(range(100, 122, 2))
                 data = {
@@ -121,7 +122,7 @@ class SkillTree():
                         'skillType':'passive', 'type':'없음', 
                         'values' : rlist, 'req':35
                         }
-                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0])
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
             elif name == '디바인 퍼니쉬먼트':
                 rlist = [0]
                 for i in range(1,41):
@@ -130,31 +131,88 @@ class SkillTree():
                 data = {'name':name, 'skillId':skid,
                         'type':'패시브스탯', 'values':rlist, 'req':req, 'subtype':'오라'}
 
-                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0])
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
+            elif name in ['매거진 드럼', '니트로 모터']:
+                rlist = [0] + list(range(2, 42, 2))
+                data = {
+                        'name':name, 'skillId':skid,
+                        'skillType':'passive', 'type':'없음', 
+                        'values' : rlist, 'req':15
+                        }
+
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
+            elif name == '유탄 마스터리':
+                rlist = [0] + list(range(10, 201, 10))
+                data = {
+                        'name':name, 'skillId':skid,
+                        'skillType':'passive', 'type':'없음', 
+                        'values' : rlist, 'req':20
+                        }
+                #print(name)
+                self.skill_enchant[str(req)]['skills'].append([data, lvl, 0, lvl])
 
             elif req >= 50 and name[-2:] == '강화':
                 skname = name[:-3]
 
-                si = self.get_skill_instance('actives', skname)
-                if si is not None:
-                    if skname == '흑염의 칼라':
-                        si = self.get_skill_instance('actives', '흑염검')
-                        if si is not None:
-                            si['dam'] *= (1 + 0.1*lvl)
-                    elif self.owner.classname == '격투가(여)' and skname == '크레이지 발칸':
-                        hit = 8 + lvl
-                        si['dam'] *= (hit/13)
-                    elif self.owner.classname == '거너(남)' and skname == '더블 건호크':
-                        si['dam'] *= (1 + 0.1462*lvl)
-                    else:
+                if skname == '류탄':
+                    #print(name, skname)
+                    si = self.get_skill_instance('actives', 'G-35L 섬광류탄')
+                    if si is not None:
                         si['dam'] *= (1 + 0.1*lvl)
+                        si['invest'].append('TP:'+str(lvl))
+
+
+                    si = self.get_skill_instance('actives', 'G-18C 빙결류탄')
+                    if si is not None:
+                        si['dam'] *= (1 + 0.1*lvl)
+                        si['invest'].append('TP:'+str(lvl))
+
+
+                    si = self.get_skill_instance('actives', 'G-14 파열류탄')
+                    if si is not None:
+                        si['dam'] *= (1 + 0.1*lvl)
+                        si['invest'].append('TP:'+str(lvl))
+
+                if skname == '류심':
+                    si = self.get_skill_instance('actives', '류심 쾌')
+                    if si is not None:
+                        si['dam'] *= (1 + 0.1*lvl)
+                        si['invest'].append('TP:'+str(lvl))
+
+                    si = self.get_skill_instance('actives', '류심 강')
+                    if si is not None:
+                        si['dam'] *= (1 + 0.1*lvl)
+                        si['invest'].append('TP:'+str(lvl))
+
+                    si = self.get_skill_instance('actives', '류심 승')
+                    if si is not None:
+                        si['dam'] *= (1 + 0.1*lvl)
+                        si['invest'].append('TP:'+str(lvl))
+
+                sil = self._get_skill_instance_all('actives', skname, None)
+                if len(sil) > 0:
+                    for si in sil:
+                        si = si[0]
+                        if skname == '흑염의 칼라':
+                            si = self.get_skill_instance('actives', '흑염검')
+                            if si is not None:
+                                si['dam'] *= (1 + 0.1*lvl)
+                        elif self.owner.classname == '격투가(여)' and skname == '크레이지 발칸':
+                            hit = 8 + lvl
+                            si['dam'] *= (hit/13)
+                        elif self.owner.classname == '거너(남)' and skname == '더블 건호크':
+                            si['dam'] *= (1 + 0.1462*lvl)
+                        else:
+                            si['dam'] *= (1 + 0.1*lvl)
+
+                        si['invest'].append('TP:'+str(lvl))
 
         for fitem in self.factor_data:
             if fitem['skillName'] == '평타':
                 penchant = fitem['penchant']
                 poison = fitem['poison']
 
-                data = {'name':'평타', 'skillId':None, 'req':1, 'dam':1, 'cool':None, 'cooltime':None, 'longterm':fitem['longterm'], 'oriname':None}
+                data = {'name':'평타', 'skillId':None, 'req':1, 'dam':1, 'cool':1, 'cooltime': fitem['cool'], 'factor': fitem['factor'], 'longterm':fitem['longterm'], 'oriname':None, 'invest':[]}
                 data['penchant'] = penchant if penchant != '' else None
                 data['poison'] = poison if poison != '' else None
 
@@ -175,7 +233,7 @@ class SkillTree():
         elif jobname == '眞 버서커' and name in ['블러드 러스트', '레이징 퓨리', '고어 크로스', '블러드 소드', '블러디 레이브', '아웃레이지 브레이크']:
             base_cool = 0.8
         #중화기개조
-        elif jobname in ['眞 런처', '스톰트루퍼'] and req not in [50, 85, 100]:
+        elif jobname == '眞 런처' and req not in [50, 85, 100]:
             base_inc = 1
 
         skillpassive = self.inner_data.get('skillpassive')
@@ -205,14 +263,22 @@ class SkillTree():
                 weptypeinfo = fitem['weptypeinfo']
                 oriname = fitem['skillOriName']
                 cool = fitem['cool']
+                if name in ['썬더 스트라이크', '썬더 콜링'] or self.owner.jobname == '眞 소환사':
+                    coolfixed = False
+                elif oriname in ['환영폭쇄', '금기 : 독사굴']:
+                    coolfixed = False
+                else:
+                    coolfixed = fitem['coolFixed']
 
-                data = {'name':name, 'skillId':skid, 'req':req, 'dam':1, 'cool':base_cool, 'oriname':oriname}
+
+                data = {'name':name, 'skillId':skid, 'req':req, 'dam':1, 'cool':base_cool, 'oriname':oriname, 'invest':[]}
 
                 data['factor'] = factor if factor != '' else None
                 data['cooltime'] = cool if cool != '' else None
                 data['longterm'] = longterm if longterm != '' else None
                 data['poison'] = poison if poison != '' else None
                 data['penchant'] = penchant if penchant != '' else None
+                data['coolFixed'] = coolfixed
 
                 if talisman != '':
                     (tname, tfactor, dammode) = talisman[1:-1].split(',')
@@ -280,10 +346,12 @@ class SkillTree():
         try:
             self.skill_data = self.skill_db[classid][jobid]['skills']
             self.factor_data = self.factor_db[classid][jobid]
-            if char.buffer is None:
-                self.skill_list = self.passive_db[classid][jobid]
+
+            if char.buffer is not None:
+                self.skill_list = self.passive_db[classid][jobid] + self.buffer_db[classid][jobid]
             else:
-                self.skill_list = self.buffer_db[classid][jobid]
+                self.skill_list = self.passive_db[classid][jobid]
+        
         except:
             raise
 
@@ -302,17 +370,18 @@ class SkillTree():
                 skills = item[typ]
                 for skill in skills:
                     data = skill[0]
-                    if data['name'] == name:
+                    if data['name'].replace(' ','') == name.replace(' ',''):
                         return skill
-                    if typ == 'actives' and data['oriname'] == name:
+                    
+                    if typ == 'actives' and isinstance(data['oriname'], str) and data['oriname'].replace(' ','') == name.replace(' ',''):
                         return skill
         else:
             skills = self.skill_enchant[str(req)][typ]
             for skill in skills:
                 data = skill[0]
-                if data['name'] == name:
+                if data['name'].replace(' ','') == name.replace(' ',''):
                     return skill
-                if typ == 'actives' and data['oriname'] == name:
+                if typ == 'actives' and isinstance(data['oriname'], str) and data['oriname'].replace(' ','') == name.replace(' ',''):
                     return skill
            
         return None
@@ -324,18 +393,18 @@ class SkillTree():
                 skills = item[typ]
                 for skill in skills:
                     data = skill[0]
-                    if data['name'] == name:
+                    if data['name'].replace(' ','') == name.replace(' ',''):
                         skill_instances.append(skill)
-                    if typ == 'actives' and data['oriname'] == name:
+                    if typ == 'actives' and isinstance(data['oriname'], str) and data['oriname'].replace(' ','') == name.replace(' ',''):
                         skill_instances.append(skill)
  
         else:
             skills = self.skill_enchant[str(req)][typ]
             for skill in skills:
                 data = skill[0]
-                if data['name'] == name:
+                if data['name'].replace(' ','') == name.replace(' ',''):
                     skill_instances.append(skill)
-                if typ == 'actives' and data['oriname'] == name:
+                if typ == 'actives' and isinstance(data['oriname'], str) and data['oriname'].replace(' ','') == name.replace(' ',''):
                     skill_instances.append(skill)
  
         return skill_instances
@@ -366,14 +435,128 @@ class SkillTree():
                     
             self.inner_data['잔영'] = mirage
 
-        elif self.owner.jobname == '가이아':
+            """
+            si = self.get_skill('actives', '인법 : 육도윤회', req = 40)
+            data = si[0]
+
+            print(data)
+            """
+
+        elif self.owner.jobname == '眞 엘븐나이트':
             si = self.get_skill('actives', '체인러쉬', req = 30)
             data = si[0]
             lv = min(si[1] + si[2], 16)
 
-
             chainrush = (lv * 0.5 + 12.5)
-            self.inner_data['체인러쉬'] = chainrush * 6
+
+            si = self.get_skill('skills', '대자연의 가호', req = 48)
+            data = si[0]
+            lv = min(si[1] + si[2], 40)
+
+            nature = (lv * 2)
+
+            self.inner_data['체인러쉬'] = (chainrush * 6, nature)
+
+        elif self.owner.jobname == '眞 스핏파이어' and self.owner.classname == '거너(남)':
+            si = self.get_skill('skills', '매거진 드럼', req = 15)
+            lv = min(si[1] + si[2], 20)
+
+            self.inner_data['사격강화'] = lv*2
+
+            si = self.get_skill('skills', '유탄 마스터리', req = 20)
+            if si is not None:
+                data = si[0]
+                lv = min(si[1] + si[2], 20)
+
+                fragup = data['values'][lv]
+                self.inner_data['류탄강화'] = fragup
+            else:
+                self.inner_data['류탄강화'] = 0
+
+        elif self.owner.jobname == '眞 스핏파이어' and self.owner.classname == '거너(여)':
+            si = self.get_skill('skills', '니트로 모터', req = 15)
+            lv = min(si[1] + si[2], 20)
+
+            self.inner_data['사격강화'] = lv*2
+
+            si = self.get_skill('skills', '유탄 마스터리', req = 20)
+
+            if si is not None:
+                data = si[0]
+                lv = min(si[1] + si[2], 20)
+
+                fragup = data['values'][lv]
+                self.inner_data['류탄강화'] = fragup
+            else:
+                self.inner_data['류탄강화'] = 0
+        elif self.owner.jobname == '眞 데몬슬레이어':
+            si = self.get_skill('skills', '탐욕의 번제', req = 48)
+
+            if si is not None:
+                data = si[0]
+                lv = min(si[1] + si[2], 40)
+
+                self.inner_data['탐욕의 번제'] = data['values'][lv]
+            else:
+                self.inner_data['탐욕의 번제'] = 0
+
+        elif self.owner.jobname == '眞 빙결사':
+            si = self.get_skill('skills', '아이스크래프트', req = 75)
+
+            if si is not None:
+                data = si[0]
+                lv = min(si[1] + si[2], 40)
+
+                self.inner_data['얼음창'] = (1 + 1.5 * data['values'][lv]/100) / (1 + data['values'][lv]/100) 
+
+            else:
+                self.inner_data['얼음창'] = 1
+        elif self.owner.jobname == '眞 레인저' and self.owner.classname == '거너(여)':
+            si = self.get_skill('skills', '체인 인라이튼', req = 95)
+
+            if si is not None:
+                data = si[0]
+                lv = min(si[1] + si[2], 40)
+
+                self.inner_data['체인 인라이튼'] = (1 + data['values'][lv]/100)
+
+            else:
+                self.inner_data['체인 인라이튼'] = 1
+        elif self.owner.jobname == '眞 검귀':
+            si = self.get_skill('skills', '악귀현신', req = 95)
+
+            if si is not None:
+                self.inner_data['악귀현신'] = 1
+            else:
+                self.inner_data['악귀현신'] = 0
+        elif self.owner.jobname == '眞 다크템플러':
+            si = self.get_skill('skills', '베스퍼스', req = 75)
+
+            if si is not None:
+                data = si[0]
+
+                lv = min(si[1] + si[2], 40)
+                self.inner_data['베스퍼스'] = (1 + data['values'][lv]/100)
+            else:
+                self.inner_data['베스퍼스'] = 1
+
+        """
+        elif self.owner.jobname == '眞 스트리트파이터' and self.owner.classname == '격투가(여)':
+            si = self.get_skill('actives', '독문무공', req = 85)
+
+            if si is not None:
+                lv = si[1] + si[2]
+
+                self.inner_data['독문스증'] = (1 + (2 * lv / 100))
+        
+        elif self.owner.jobname == '眞 스트라이커' and self.owner.classname == '격투가(남)':
+            si = self.get_skill('actives', '화염의 각', req = 50)
+
+            if si is not None:
+                lv = si[1] + si[2]
+
+                self.inner_data['화각스증'] = (1 + ((4 * lv - 2) / 100))
+        """
 
 
     def get_skill_instance(self, typ, name, req = None):
@@ -402,14 +585,22 @@ class SkillTree():
     def increase_skill_level(self, typ, name, inc, req = None, base = False):
         skill_list = self._get_skill_instance_all(typ, name, req)
 
+        if len(skill_list) == 0:
+            return False
+
         for skill in skill_list:
             if base is True:
                 skill[1] += inc
             else:
                 skill[2] += inc
 
+        return True
+
     def increase_skill_level_range(self, typ, lvrange, inc, base = False):
+        ret = []
         minlv, maxlv = lvrange
+        minlv = int(minlv)
+        maxlv = int(maxlv)
         for lv, val in self.skill_enchant.items():
             lvl = int(lv)
 
@@ -417,20 +608,28 @@ class SkillTree():
                 skills = val[typ]
 
                 for skill in skills:
+                    ret.append(skill[0]['name'])
                     if base is True:
                         skill[1] += int(inc)
                     else:
                         skill[2] += int(inc)
 
+        return ret
+
     def finalize_levelup(self):
+        self.owner.char_stat['레벨링구간'] = {}
+
         for lv, val in self.skill_enchant.items():
             lvup = val['level']
+            #print("최종", lv, lvup)
 
             for skill in val['skills']:
                 skill[2] += lvup
 
             for skill in val['actives']:
                 skill[2] += lvup
+
+            self.owner.char_stat['레벨링구간'][lv] = lvup
  
        
     def has_skill(self, target, skname):
@@ -477,10 +676,11 @@ class SkillTree():
         elem_orig = max([char_stat['화속성강화'], char_stat['명속성강화'], char_stat['수속성강화'], char_stat['암속성강화']])
  
         self.inner_data['쿨패시브'] = 1
-        for se in self.skill_enchant.values():
+        for req, se in self.skill_enchant.items():
             for pas in se['skills']:
                 data = pas[0]
                 lv = pas[1]
+                base = pas[3]
 
                 sname = data['name']
                 typ = data['type']
@@ -490,20 +690,26 @@ class SkillTree():
 
                 if wep_type is not None and wep_type != mywep_type:
                     continue
+                try:
+                    v3 = data['values'][base-1]
+                except:
+                    print(base)
+                    v3 = 0
 
                 lv = min(len(data['values']) - 1, lv)
 
-                v1 = data['values'][lv]
-
                 if mastery is True and '무기의 극의' in self.inner_data.keys():
+                    v1 = data['values'][lv + self.inner_data['무기의 극의']['기본레벨']]
                     nlevel = min(len(data['values']) - 1, lv + self.inner_data['무기의 극의']['마스터리레벨'])
                 else:
+                    v1 = data['values'][lv]
                     nlevel = min(len(data['values']) - 1, lv + pas[2])
 
                 v2 = data['values'][nlevel]
 
                 v1 = 0 if isinstance(v1, str) else v1
                 v2 = 0 if isinstance(v2, str) else v2
+                v3 = 0 if isinstance(v3, str) else v3
 
                 if '초월의 룬' in self.inner_data.keys():
                     if sname == '쇼타임' and typ == '쿨감':
@@ -541,16 +747,25 @@ class SkillTree():
                         char_stat[elem + '속성저항'] += v
 
                 elif typ.find('강화') >= 0:
+                    if (data.get('skillType') == 'passive' and sname != '원소 융합') or sname == '아이스 로드':
+                        inc = v
+                    else:
+                        inc = v2
+
                     elem = typ.split('속성')[0][-1]
                     if elem == '든' or elem == '사':
                         for et in elem_type:
-                            char_stat[et + '강화'] += v
+                            char_stat[et + '강화'] += inc
                         t = '모든'
                     else:
                         t = elem
-                        char_stat[elem + '속성강화'] += v
+                        char_stat[elem + '속성강화'] += inc
 
-                    char_stat['패시브'][sname] = {'레벨':lv + pas[2], t+'속성강화':v2}
+                    if char_stat['패시브'].get(sname) is not None:
+                        char_stat['패시브'][sname].update({'레벨':lv + pas[2], t+'속성강화':v2, 'base':v3, 'req':int(req)})
+                    else:
+                        char_stat['패시브'][sname] = {'레벨':lv + pas[2], t+'속성강화':v2, 'base':v3, 'req':int(req)}
+
                 elif typ == '쿨감':
                     if sname == '윌 드라이버' and mywep_type != '토템':
                         continue
@@ -562,30 +777,49 @@ class SkillTree():
                         if sname in ['강인한 신념', '병기 숙련', '원소 폭격', '윌 드라이버', '세라픽 페더', '블러드', 'HS-1 친구들', 'G-오퍼레이터', '쇼타임', '휘몰아치는 질풍의 봉 마스터리', '거병 마스터리', '장창 숙련', '화염의 각'] and clv in ['50', '85', '100']:
                             continue
 
-                        #TODO:레벨링을 인술적용 스킬로 변경
-                        if sname in ['인술'] and clv in ['50', '85', '100']:
-                            continue
+                        askill_list = cinfo['actives']
 
-                        cinfo['cool'] *= (1 - v2/100)
+                        for askill in askill_list:
+                            data = askill[0]
+                            asname = data['name']
 
+                            if asname in ['블랙 망토', '변이 파리채', '대왕 파리채', '롤리팝 크러쉬']:
+                                continue
 
-                        #print('쿨감', sname, v2)
+                            if sname == '인술' and asname not in ['화염구', '환영 다중 수리검', '화염선풍', '나선 대차륜 쿠나이', '열화천도', '두꺼비유염탄', '비기 : 염무개화', '마환 풍마 수리검', '야마타오로치', '아마테라스']:
+                                continue
+
+                            if data.get('cool') is not None:
+                                data['cool'] *= (1 - v2/100)
+
+                        #cinfo['cool'] *= (1 - v2/100)
+                        #print('쿨감', sname, v2, lv, nlevel)
                 elif typ == '데미지':
                     if sname in ['자각의 실마리', '각성의 실마리']:
-                        #print('각성의실마리', v2)
                         self.skill_enchant['85']['dam'] *= (1 + v2/100)
                         continue
                     elif sname == '대자연의 가호':
                         self.skill_enchant['85']['dam'] *= (1 + v2/100)
                         self.skill_enchant['50']['dam'] *= (1 + v2/100)
-                
+                    elif sname == '천수천안':
+                        self.inner_data['천수천안'] = 14.5 + v2
+                    elif sname == '현자의 돌':
+                        self.inner_data[sname] = v2
+
+                        char_stat['패시브'][sname] = {'레벨':lv + pas[2], '데미지증가':v2 , 'base':v3, 'req':int(req)}
+                            #char_stat['패시브']['호문쿨루스'] = {'레벨':lv + pas[2], '데미지증가':v2-5}
+                        continue
+                    
                     if sname == '코어 블레이드 마스터리' and mywep_name == '프로젝트 : 오버코어':
                         v2 *= 2
 
                     passive_orig *= (1 + v1/100)
                     passive_inc *= (1 + v2/100)
                     
-                    char_stat['패시브'][sname] = {'레벨':lv + pas[2], '데미지증가':v2}
+                    if char_stat['패시브'].get(sname) is not None:
+                        char_stat['패시브'][sname].update({'레벨':lv + pas[2], '데미지증가':v2, 'base':v3, 'req':int(req)})
+                    else:
+                        char_stat['패시브'][sname] = {'레벨':lv + pas[2], '데미지증가':v2, 'base':v3, 'req':int(req)}
 
                 elif typ == '패시브스탯' and self.owner.isBuffer is True:
                     main_stat_type = self.inventory.main_stat['type']
@@ -597,7 +831,8 @@ class SkillTree():
                         #if buffopt['type'] == '아포':
                             #print ('지능증가', '패시브:'+sname, inc, v)
                             #print(sname, pas[1], pas[2])
-                        char_stat['패시브'][sname] = v2
+
+                        char_stat['버프패시브'][sname] = v2
                         if buffopt['type'] == '아포':
                             char_stat[main_stat_type] += v
 
@@ -610,13 +845,12 @@ class SkillTree():
                             buffopt['오라']['value'] = inc
                         else:
                             inc = v2
-                            char_stat['패시브'][sname] = v2
+
+                            char_stat['버프패시브'][sname] = v2
 
                         self.inventory.main_stat['value'] += inc
                         if buffopt['type'] == '아포':
-                            #print('지능증가', '오라;'+sname, inc, v2, v)
                             char_stat[main_stat_type] += inc
-
 
                 elif typ.find('추가') >= 0:
                     buff_type = self.buffoption['type']
@@ -627,6 +861,8 @@ class SkillTree():
                 
         self.inner_data['레벨링패시브증가량'] = ((passive_inc/passive_orig) - 1) * 100   
         self.inner_data['레벨링속강증가량'] = elem_inc - elem_orig
+        self.owner.char_stat['패시브레벨링증가량'] = self.inner_data['레벨링패시브증가량']
+        self.owner.char_stat['속강패시브레벨링증가량'] = self.inner_data['레벨링속강증가량']
         self.inner_data['패시브총합'] = passive_inc
 
     def finalize_active(self):
@@ -669,15 +905,38 @@ class SkillTree():
                 act['plus_level'] = skill_items[2]
 
                 act['dam'] *= dam * inc
-                if act.get('cooltime') is not None:
-                    act['cool'] *= cool 
-                    act['cooltime'] = float(act['cooltime']) * act['cool']
+
+                acool = act.get('cooltime')
+                if acool is not None and acool != '':
+                    if 'coolFixed' in act.keys() and act['coolFixed']:
+                        act['cool'] = 1
+                        act['cooltime'] = float(act['cooltime'])
+                    else:
+                        act['cool'] *= cool
+
+                        if isinstance(act['cooltime'], list):
+                            try:
+                                if act['final_level'] <= len(act['cooltime']):
+                                    act['cooltime'] = float(act['cooltime'][act['final_level']]) * act['cool']
+                                else:
+                                    act['cooltime'] = float(act['cooltime'][0]) * act['cool']
+                            except:
+                                act['cooltime'] = float(act['cooltime'][0]) * act['cool']
+                                pass
+                        else:
+                            act['cooltime'] = float(act['cooltime']) * act['cool']
 
     def apply_baselevel(self):
+        char_stat = self.owner.char_stat
+        mywep_name = char_stat['inventory'].weapon_info['name']
+        town_inc = self.inventory.inner_data.get('마을적용패시브')
+        if town_inc is None:
+            town_inc = 0
+
         for req, se in self.skill_enchant.items():
             lvup = se['level']
             if req != '95':
-                add_inc = self.inventory.inner_data['마을적용패시브']
+                add_inc = town_inc
             else:
                 add_inc = 0
 
@@ -687,6 +946,9 @@ class SkillTree():
                 sname = data['name']
                 typ = data['type']
                 wep_type = data.get('wep_type')
+
+                if sname == '원소 융합':
+                    self.owner.char_stat['암속성저항'] += 10
 
                 if typ == '패시브스탯' and self.owner.isBuffer is True:
                     buff_type = self.buffoption['type']
@@ -705,20 +967,23 @@ class SkillTree():
 
                         if self.owner.jobname == '眞 웨펀마스터':
                             si = self.get_skill('skills', '무기의 극의', req = 15)
-                            lv = si[1] + si[2] #+ (lvup + add_inc)
-                        
-                            lv = si[0]['values'][lv]
+                            lv = si[1] + si[2] + add_inc + lvup
+
+                            lv = si[0]['values'][lv] + 1
                         else:
-                            lv = pas[1] + pas[2]# + (lvup + add_inc)
+                            lv = pas[1] + pas[2] + lvup + add_inc
 
                         lv = min(len(data['values']) - 1, lv)
     
                         v = data['values'][lv]
 
+                        if sname == '코어 블레이드 마스터리' and mywep_name == '프로젝트 : 오버코어':
+                            v *= 2
+
                         self.owner.char_stat[char_dam_type] /= (1 + v/100)
                         self.owner.char_stat[char_dam_type] = int(self.owner.char_stat[char_dam_type])
                     
-                    if typ not in ['데미지', '쿨감']:
+                    if typ not in ['데미지', '쿨감', '없음']:
                         pas[1] += pas[2] + lvup
                         pas[2] = -1 * (lvup + add_inc)
     
@@ -731,17 +996,18 @@ class SkillTree():
                         self.owner.char_stat['지능'] /= (1 + v/100)
                         self.owner.char_stat['힘'] = int(self.owner.char_stat['힘'])
                         self.owner.char_stat['지능'] = int(self.owner.char_stat['지능'])
-
-
     
-    def calculate_skills(self, deal_time, f, d, exclude = None):
+    def calculate_skills(self, deal_time, cooldown, pf, f, d, def_dual, exclude = None, active_rate = 1):
         skill_list = []
         ori_deal_time = deal_time
+        ori_active_rate = active_rate
+        count_add = 0
 
         for lv, items in self.skill_enchant.items():
-            if self.owner.classTypeNeo is True and lv == '50':
-                continue
-            elif self.owner.classTypeNeo is False and lv in ['95', '100']:
+            #if self.owner.classTypeNeo is True and lv == '50':
+            #    continue
+
+            if self.owner.classTypeNeo is False and lv in ['95', '100']:
                 continue
 
             if exclude is not None and int(lv) in exclude:
@@ -759,8 +1025,15 @@ class SkillTree():
                 
                 if oriname is None or oriname == '':
                     skname = name
+                    imgname = None
                 else:
-                    skname = oriname
+                    if oriname.find('$') >= 0:
+                        _oriname = oriname.split('$')
+                        skname = _oriname[0]
+                        imgname = _oriname[1]
+                    else:
+                        skname = oriname
+                        imgname = None
 
                 if factor is not None and factor != '':
                     factor = int(factor)
@@ -787,8 +1060,25 @@ class SkillTree():
                 fdeal = dam * factor
                 ldeal = dam * longterm
 
+                coolFixed = act.get('coolFixed')
+
+                if coolFixed == False and cooldown is not None:
+                    cooltime *= (1 - cooldown/100)
+
+                if skname == '트윙클 스매쉬' and self.inner_data.get('홈런 퀸') is not None:
+                    count_add = math.ceil(ori_deal_time / cooltime) + 1
+                elif skname == '악귀참수' and self.inner_data.get('천쇄참수') is not None:
+                    count_add = math.ceil(ori_deal_time / cooltime) + 1
+                elif (skname == '엘레멘탈 필드' or skname == '폭풍의 숨결') and self.inner_data.get('고정쿨감') is not None:
+                    cooltime -= self.inner_data['고정쿨감']
+                elif skname == 'FSC-7' and self.inner_data.get('라이트웨이트') is not None:
+                    count_add = 1
+                elif skname in ['플레게의 정수', '성화']:
+                    cooltime *= 0.85
+
                 try:
-                    skill_data = {'이름':skname, 
+                    skill_data = {'이름':skname,
+                              'skimage': imgname,
                               '레벨':act['final_level'], 
                               '레벨링':act['plus_level'],
                               '데미지증가':round(dam, 2),
@@ -796,23 +1086,26 @@ class SkillTree():
                               '원계수':round(factor),
                               '스킬계수':round(fdeal),
                               '지속계수':round(ldeal),
-                              'requiredLevel': int(lv)
+                              'requiredLevel': int(lv),
+                              'invest': act['invest'],
+                              'coolfixed':coolFixed
                               }
                     if act.get('cool') is not None:
-                        skill_data['쿨타임 증감'] = round(act['cool'], 2)
+                        skill_data['쿨타임 증감'] = round(act['cool'], 4)
                 except:
                     print(skname)
                     raise
                         
                 skill_list.append(skill_data)
 
-        skill_list.sort(key=(lambda x: x['데미지증가']), reverse=True)
+        skill_list.sort(key=(lambda x: len(x['invest'])), reverse=True)
 
         act_cool_mean = self.inner_data['평균쿨감'] 
 
-        point_skill = 2
+        point_skill = 3
         for act in skill_list:
             deal_time = ori_deal_time
+            active_rate = ori_active_rate
 
             name = act['이름']
             cooltime = act['쿨타임']
@@ -821,11 +1114,17 @@ class SkillTree():
             lv = act['requiredLevel']
 
             if cooltime != 0:
-                if deal_time <= 25:
-                    if self.owner.jobname in ['眞 메카닉', '옵티머스', '眞 소울브링어', '眞 스핏파이어', '프레이야', '마신']:
+                if self.owner.classname == '크리에이터':
+                    if name in ['빙하시대', '링크', '아이스 스톤', '플레임 허리케인', '윈드 스톰', '윈드 프레스', '운석 낙하', '파이어 월']:
+                        cooltime /= 2
+                        if name != '플레임 허리케인':
+                            factor /= 2
+
+                if deal_time <= 30:
+                    if self.owner.jobname in ['眞 메카닉', '眞 소울브링어', '眞 스핏파이어', '眞 카오스'] or self.owner.classname in ['크리에이터']:
                         time = deal_time
 
-                    elif self.owner.jobname not in ['가이아', '眞 그래플러', '眞 아수라', '眞 버서커',  '眞 마도학자', '眞 인파이터', '眞 퇴마사', '眞 어벤저', '眞 빙결사', '세이비어', '드레드노트', '워로드', '제노사이더', '듀란달', '眞 스트라이커', '眞 엘레멘탈마스터', '레퀴엠'] or self.owner.classname in ['크리에이터']:
+                    elif self.owner.jobname not in ['眞 엘븐나이트', '眞 그래플러', '眞 아수라', '眞 버서커',  '眞 마도학자', '眞 인파이터', '眞 퇴마사', '眞 어벤저', '眞 빙결사', '眞 팔라딘', '眞 드래곤나이트', '眞 뱅가드', '眞 드래고니안 랜서', '眞 듀얼리스트', '眞 스트라이커', '眞 엘레멘탈마스터', '眞 요원']:
                         if lv >= 80:
                             time = deal_time
                         elif 30 < lv <= 75:
@@ -838,10 +1137,11 @@ class SkillTree():
                         else:
                             time = deal_time
                 else:
-                    if self.owner.jobname in ['眞 메카닉', '옵티머스', '眞 소울브링어', '眞 스핏파이어', '프레이야', '마신']:
+                    if self.owner.jobname in ['眞 메카닉', '眞 소울브링어', '眞 스핏파이어', '眞 카오스'] or self.owner.classname in ['크리에이터']:
                         time = deal_time
 
-                    elif self.owner.jobname not in ['가이아', '眞 그래플러', '眞 아수라', '眞 버서커',  '眞 마도학자', '眞 인파이터', '眞 퇴마사', '眞 어벤저', '眞 빙결사', '세이비어', '드레드노트', '워로드', '제노사이더', '듀란달', '眞 스트라이커', '眞 엘레멘탈마스터'] or self.owner.classname in ['크리에이터']:
+                    elif self.owner.jobname not in ['眞 엘븐나이트', '眞 그래플러', '眞 아수라', '眞 버서커',  '眞 마도학자', '眞 인파이터', '眞 퇴마사', '眞 어벤저', '眞 빙결사', '眞 팔라딘', '眞 드래곤나이트', '眞 뱅가드', '眞 드래고니안 랜서', '眞 듀얼리스트', '眞 스트라이커', '眞 엘레멘탈마스터', '眞 요원']:
+
                         if lv >= 80:
                             time = deal_time
                         elif 30 < lv <= 75:
@@ -868,21 +1168,64 @@ class SkillTree():
 
                     time = time * coolcut
 
-                if deal_time <= 25 and lv not in [50, 85, 100] and point_skill != 0:
-                    if deal_time % cooltime <= 3:
-                        time = deal_time
+                if lv not in [50, 85, 100] and point_skill != 0:
+                    if point_skill == 3:
+                        tmargin = 0.1
+                    else:
+                        tmargin = 0.5
+
+                    #if deal_time == 25 and cooldown != 20:
+                    #    print(deal_time, time, math.ceil(deal_time / cooltime), math.ceil(time / cooltime),cooltime, name)
+ 
+                    if math.ceil((deal_time - tmargin) / cooltime) != math.ceil(time / cooltime):
+                        #print(deal_time, time, math.ceil((deal_time - tmargin) / cooltime), math.ceil(time / cooltime),cooltime, name)
+                        time = deal_time - tmargin
                         point_skill -= 1
 
+                if self.owner.jobname == '眞 검귀' and name == '귀신보':
+                    cooltime -= self.inner_data['악귀현신']
+                
                 deal_count = math.ceil(time / cooltime)
+
+                if active_rate != 1 and deal_count > 2:
+                    _ar = 1 - active_rate
+                    _ar *= (math.ceil((deal_count - 1)/5))
+
+                    active_rate = 1 - _ar
+
+                    time *= active_rate
+
+                    deal_count = math.ceil(time / cooltime)
+
+                #print(name, deal_count)
             else:
                 deal_count = 0
-                time = deal_time * 0.95
+                time = deal_time * 0.95 * active_rate 
                 
             time = math.ceil(time*10) / 10
 
             #print(name, time)
+            if self.owner.jobname == '眞 런처' and self.owner.classname == '거너(여)':
+                if name == 'FSC-7':
+                    deal_count += count_add
 
-            if self.owner.jobname == '眞 웨펀마스터':
+            elif self.owner.jobname == '眞 검귀':
+                if name == '귀신보':
+                    deal_count += count_add
+
+            elif self.owner.jobname == '眞 배틀메이지':
+                if name == '쇄패':
+                    deal_count += count_add
+
+            elif self.owner.jobname == '眞 스트리트파이터' and self.owner.classname == '격투가(남)':
+                if name == '바늘 투척':
+                    deal_count += (3 * math.ceil(deal_time/35))
+            
+            elif self.owner.jobname == '眞 스핏파이어': #and self.owner.classname == '거너(남)':
+                if name.find('류탄') >= 0:
+                    deal_count = min(5 * math.ceil(deal_time/35), deal_count)
+
+            elif self.owner.jobname == '眞 웨펀마스터':
 
                 plimit = self.owner.char_stat['패시브']['극한의 경지']['데미지증가']
 
@@ -899,32 +1242,115 @@ class SkillTree():
                     factor /= (1 + plimit/100)
 
             elif self.owner.classname == '다크나이트':
-                if deal_time > 25:
-                    deal_time *= 0.7
+                s_tal_list = self.owner.char_stat['탈리스만스킬']
+                talSel = self.owner.char_stat.get('탈선착용')
 
-                if name == '다크 웨이브 폴':
-                    deal_count = math.ceil(deal_time/10)
+                if name == '일루젼 슬래쉬':
+                    deal_count = math.floor(deal_time/11)
                     factor *= 2
-                elif name in ['차지 익스플로전', '다크 버스트', '다크 플레임 소드', '일루젼 슬래쉬']:
-                    deal_count = math.floor(deal_time/10)
+                elif name in ['다크 웨이브 폴', '차지 익스플로전', '다크 버스트', '다크 플레임 소드']:
+                    if talSel is not None:
+                        if name in s_tal_list[:-1]:
+                            if (s_tal_list.index(name)) == 0:
+                                _cooltime = cooltime * 0.3
+                            else:
+                                _cooltime = cooltime * 0.4
+                            deal_count = math.ceil(time/_cooltime)
+                    else:
+                         if name in s_tal_list:
+                            deal_count = math.ceil(deal_time/11)
                     factor *= 2
-                elif name == '다크 브레이크':
-                    deal_count = math.floor(deal_time/20)
+                elif name in ['웨이브 스핀', '다크 소드', '다크 레이브']:
                     factor *= 2
-                elif lv == str('85'):
+                elif name in ['다크 브레이크', '디아볼릭 슬래쉬']:
+                    deal_count = math.floor(deal_time/22)
                     factor *= 2
-
+                elif lv in [85, 100]:
+                    factor *= 2
+                """
             elif self.owner.jobname == '眞 쿠노이치':
                 if name in ['야마타오로치', '마환 풍마수리검', '아마테라스', '비기 : 염무개화', '두꺼비유염탄' '열화천도']:
                     deal_count = min(2 * math.ceil(deal_time/35) , deal_count)
+                """
 
-            elif self.owner.jobname == '옵티머스':
+            elif self.owner.jobname == '眞 메카닉' and self.owner.classname == '거너(여)':
                 if name == 'G-S.P. 팔콘':
-                    deal_count += (3 * math.ceil(deal_time/35))
+                    deal_count += 2
+            elif self.owner.jobname == '眞 뱅가드':
+                if name == '임팩트 스매쉬':
+                    pass
+                    #deal_count *= 2
+            elif self.owner.jobname == '眞 소환사':
+                if name == '채찍질':
+                    deal_count = 3
 
-            deal = deal_count * factor + time * longterm
+            if def_dual is not None:
+                ef_max, ef_min = def_dual
 
-            if self.owner.jobname == '眞 로그':
+                if deal_count > 0:
+                    max_count = math.ceil(deal_count / 2)
+                    min_count = math.floor(deal_count / 2) 
+
+                    if max_count == min_count:
+                        max_count += 0.5
+                        min_count -= 0.5
+
+                    e_avg = (ef_max * max_count + ef_min * min_count)/deal_count
+
+                    #print (name, ef_max, ef_min, e_avg, max_count, min_count, deal_count)
+
+                    countf = (1 + e_avg/100)
+
+                    timef = (1 + ((ef_max * 3 + ef_min * 2) / 5) / 100)
+            else:
+                countf = timef = 1
+
+            if self.owner.jobname == '眞 소환사':
+                """
+                if name in ['썬더콜링(글레어린)', '화염폭검술(플레임 헐크)', '식선(라모스)', '헵타 아이스(아퀘리스)', '블랙 스웜(데드 멀커)', '식락', '필살검 천귀살']:
+                    countf *= 1.15
+                elif name in ['전설소환 : 월영', '포식의 델라리온']:
+                    countf *= 0.957
+                elif name == '초고밀도 레이저(에체베리아)':
+                    countf *= 1.3
+                elif name == '채찍질':
+                    countf *= 0.68
+                elif name == '지고의 정령왕':
+                    countf *= 1.3
+
+                if name in ['전설소환 : 갈애의 라모스', '계약소환 : 정복자 카시야스']:
+                    timef *= 1.15
+                elif name in ['정령소환 : 글레어린', '정령소환 : 데드 멀커', '정령소환 : 아퀘리스', '정령소환 : 플레임 헐크']:
+                    timef *= 1.725
+                elif name == '정령소환 : 정령왕 에체베리아':
+                    timef *= 1.95
+                elif name in ['계약소환 : 기갑 호도르', '계약소환 : 프리트', '계약소환 : 검은기사 산도르', '계약소환 : 루이즈 언니!', '계약소환 : 타우킹 쿠루타']:
+                    timef *= 1.5
+                """
+                if name not in ['포식의 델라리온', '채찍질', '정령 희생']:
+                    countf *= 1.045
+                    timef *= 1.045
+
+            elif self.owner.jobname == '眞 메카닉' and self.owner.classname == '거너(남)':
+                if name in ['메카 드롭', 'Ez-10 카운터어택', 'TX-45 A-Team', 'RX-60 트랩러너', 'Ez-8 카운트다운', 'RX-78 랜드러너', '공중 전투 메카 : 템페스터']:
+                    countf *= 1.4
+                elif name == '스패로우 팩토리' and self.has_skill(self.owner.sk_dict['skill']['style']['passive'], '솔라 모듈 시스템') is False:
+                    countf *= 1.4
+            
+            elif self.owner.jobname == '眞 메카닉' and self.owner.classname == '거너(여)':
+                if name in ['Ez-8 카운트다운', 'RX-78 랜드러너', 'Ez-10 카운터 어택']:
+                    countf *= 1.4
+                elif name in ['트랜스폼 : G-2 롤링썬더', 'G 마그네틱']:
+                    countf *= 0.76923
+
+            deal = deal_count * factor * countf + time * longterm * timef
+
+            if self.owner.jobname == '眞 다크템플러':
+                if name.find('리버레이트') >= 0:
+                    ves = self.inner_data['베스퍼스']
+                    deal /= ves
+ 
+            elif self.owner.jobname == '眞 로그':
                 hitend = self.inner_data['히트엔드']
                 if name == '데스 허리케인':
                     deal *= (0.92 + (0.08 * hitend/100))
@@ -940,45 +1366,153 @@ class SkillTree():
                     deal *= (1 + mirage/100)
 
                 if name in ['야마타오로치', '마환 풍마수리검', '아마테라스', '비기 : 염무개화', '두꺼비유염탄', '열화천도']:
-                    deal += (deal * 0.8 / deal_count)
+                    record = min(deal_count, math.ceil((ori_deal_time - 10) / 25))
+                    
+                    """
+                    if (ori_deal_time == 25 and cooldown == None):
+                        print(name, record, deal_count, (ori_deal_time - 10) / 25)
+                    """
+
+                    deal += (deal/deal_count * 0.8) * record
+
             elif self.owner.jobname == '眞 넨마스터' and self.owner.classname == '격투가(남)':
                 if name in ['사자후', '기공장', '기호지세', '금뇌호 : 심판의 넨수', '넨 스피어', '광호천지파', '기공환', '제황나선격']:
                     deal *= 1.6
 
-            elif self.owner.jobname == '가이아':
-                chainrush = self.inner_data['체인러쉬']
+            elif self.owner.jobname == '眞 엘븐나이트':
+                chainrush, nature = self.inner_data['체인러쉬']
+
                 if name == '체인 스트라이크':
                     deal *= (1 + (chainrush+30)/100)
-                elif lv not in ['50', '85', '100']:
+                elif lv not in [50, 85, 100]:
                     deal *= (1 + chainrush/100)
+
+            elif self.owner.jobname == '眞 스트리트파이터' and self.owner.classname == '격투가(남)':
+                if name in ['니들 스핀', '천붕지괴', '더티 배럴', '광폭혈쇄']:
+                    tpas = self.inner_data['천수천안']
+                    ori = tpas - 14.5
+
+                    deal /= (1 + ori/100)
+                    deal *= (1 + tpas/100)
+                """
+            elif self.owner.jobname == '眞 스트라이커' and self.owner.classname == '격투가(남)':
+                deal *= self.inner_data['화각스증']
+                """
+            elif self.owner.jobname == '眞 그래플러' and self.owner.classname == '격투가(여)':
+                if name in ['자이언트 스윙', '싸이클론 어택', '와일드 캐넌 스파이크']:
+                    deal *= 1.6
+            
+            elif self.owner.jobname == '眞 스핏파이어':
+                if name in ['버스터 샷', '네이팜 탄', '피스톨 카빈', '교차 사격']:
+                    md = self.inner_data['사격강화']
+                    deal *= (1 + md/100)
+
+                elif name in ['G-18C 빙결류탄', 'G-35L 섬광류탄', 'G-14 파열류탄']:
+                    fd = self.inner_data['류탄강화']
+                    deal *= (1 + fd/100)
+            elif self.owner.jobname == '眞 마도학자':
+                if name in ['플로레 컬라이더', '반중력 기동장치']:
+                    deal *= (1 + (self.inner_data['현자의 돌'] - 5)/100)
+
+                elif name in ['메가 드릴', '성난 불길 가열로', '용암지대 생성물약']:
+                    deal *= (1 + (self.inner_data['현자의 돌'] + 68)/100)
+
+                else:
+                    deal *= (1 + self.inner_data['현자의 돌']/100)
+            elif self.owner.jobname == '眞 데몬슬레이어':
+                if name in ['검마격살', '혈화난무']:
+                    deal /= (1 + self.inner_data['탐욕의 번제']/100)
+
+            elif self.owner.jobname == '眞 빙결사':
+                if name in ['샤드 매그넘', '핀포인트 러시', '아이스 빅 해머', '아이스 크래시', '회전투창', '크리스탈 블레이드', '설화연창']:
+                    deal *= self.inner_data['얼음창']
+
+            elif self.owner.jobname == '眞 레인저' and self.owner.classname == '거너(여)':
+                if name == '소닉 스파이크':
+                    deal /= self.inner_data['체인 인라이튼']
+            elif self.owner.jobname == '眞 소드마스터':
+                if name == '반월':
+                    deal *= 1.23
+
+                elif name == '섬광':
+                    deal *= 1.073
+            elif self.owner.jobname == '眞 퇴마사':
+                if name not in ['무쌍격', '거선풍', '단층지격', '공참타']:
+                    deal *= 1.18
 
             #print(deal, f, round(deal * f))
 
-            act['최종계수'] = round(deal * f)
-            act['데미지'] = round(deal * f * 1.34 * 1.5 * (1 - d/100))
+            act['최종계수'] = round(deal)
+            act['적용패시브'] = pf
+            act['점수기준'] = round(deal * pf * f)
+            act['데미지'] = round(deal * pf * f * 1.5 * (1 - d/100))
             act['사용횟수'] = deal_count
+            act['적용딜타임'] = time
 
-            #print(act)
-                    
+        """
+        if deal_time == 25 and cooldown == 20:
+            for skill in skill_list:
+                if skill['이름'] in ['낙뢰부', '오망성진','오행(五行):벽천지격']:
+                    print(skill)
+        """
+
         return skill_list
 
-    def calculate_deal(self, d_info):
+    def calculate_deal(self, d_info, synergy):
         char_stat = self.owner.char_stat
 
-        #TODO: 증추 크증추 계산은 다른데서 한번만
-        char_stat['증댐'] += char_stat['증추']
-        char_stat['크증댐'] += char_stat['크증추']
-        del char_stat['증추']
-        del char_stat['크증추']
+        add_stat = 0
+        s_inc = 1
+        if synergy is not None:
+            for k, v in synergy.items():
+                if k in ['증추', '크증추', '모공', '추댐', '힘지', '물마독공']:
+                    char_stat[k] += v
+                elif k == '스탯':
+                    add_stat = v
+                elif k == '시너지':
+                    s_inc *= 1.34
+                elif k == '시너지스공' and char_stat['char_type'] == '시너지':
+                    s_inc *= v
 
-        char_stat['스공'] = round((char_stat['스공'] - 1),2) * 100
+        else:
+            s_inc = 1.34
+
+        #TODO: 증추 크증추 계산은 다른데서 한번만
+        if char_stat.get('증추') is not None and char_stat.get('크증추') is not None:
+            char_stat['증댐'] += char_stat['증추']
+            char_stat['크증댐'] += char_stat['크증추']
+            del char_stat['증추']
+            del char_stat['크증추']
+
+            char_stat['스공'] = round((char_stat['스공'] - 1),2) * 100
 
         main_stat = max([char_stat['힘'], char_stat['지능']])
         base_stat = self.owner.base_stat
 
-        elem_cur = max([char_stat['화속성강화'], char_stat['명속성강화'], char_stat['수속성강화'], char_stat['암속성강화']])
-        elem_inc = (1 + (elem_cur + 11 - (d_info['몹속저'] - d_info['버퍼속저깍'])) * 0.0045)
-        char_stat['속강딜증가'] = (elem_inc - 1) * 100
+        if self.inner_data.get('수문장모드') == 'dual':
+            elem_list = [char_stat['화속성강화'], char_stat['명속성강화'], char_stat['수속성강화'], char_stat['암속성강화']]
+            elem_list.sort()
+
+            elem_max = sum(elem_list[2:]) / 2
+            elem_min = sum(elem_list[:2]) / 2
+
+            elem_max_inc = (1 + (elem_max + 11 - (d_info['몹속저'] - d_info['버퍼속저깍'])) * 0.0045)
+            elem_min_inc = (1 + (elem_min + 11 - (d_info['몹속저'] - d_info['버퍼속저깍'])) * 0.0045)
+
+            #print (elem_max, elem_min)
+
+            ef_max = (elem_max_inc - 1) * 100
+            ef_min = (elem_min_inc - 1) * 100
+
+            ef = 0
+            char_stat['듀얼수문장'] = (ef_max, ef_min)
+            char_stat['속강딜증가'] = ef_max + ef_min / 2
+            char_stat['적용속강'] = (elem_max_inc + elem_min_inc) / 2
+        else:
+            elem_cur = max([char_stat['화속성강화'], char_stat['명속성강화'], char_stat['수속성강화'], char_stat['암속성강화']])
+            elem_inc = (1 + (elem_cur + 11 - (d_info['몹속저'] - d_info['버퍼속저깍'])) * 0.0045)
+            ef = char_stat['속강딜증가'] = (elem_inc - 1) * 100
+            char_stat['적용속강'] =  elem_cur
 
         if self.owner.classTypeNeo is False:
             if self.owner.bonus_disable is False:
@@ -1009,7 +1543,7 @@ class SkillTree():
         sf *= (1 + char_stat['추댐']/100) * (1 + char_stat['모공']/100)
         sf *= (1 + char_stat['물마독공']/100) * (1 + char_stat['지속댐']/100)
         #sf *= (1 + char_stat['패시브딜증가']/100)
-        sf *= (1 + char_stat['속강딜증가']/100)
+        sf *= (1 + ef/100)
         if d_info.get('지역버프') is not None:
             self.inner_data['지역버프'] = int((main_stat - base_stat) * d_info['지역버프']['factor'] + d_info['지역버프']['inc'])
         d_result = char_stat[d_info['name']+'분석결과'] = {}
@@ -1028,26 +1562,59 @@ class SkillTree():
             d_result[key]['버퍼버프스탯'] = dstat
 
             if self.owner.buffer is None:
-                d_result[key]['적용스탯'] = dstat + self.inner_data['지역버프'] + main_stat
+                d_result[key]['적용스탯'] = dstat + self.inner_data['지역버프'] + main_stat + add_stat
             else:
                 d_result[key]['적용스탯'] = main_stat + self.inner_data['지역버프']
             
-            f *= (1 + ((1 + char_stat['힘지']/100) * d_result[key]['적용스탯']/250))
+            f *= (1 + ((1 + char_stat['힘지']/100) * d_result[key]['적용스탯']/250)) * s_inc
 
             if self.inventory.inner_data.get('정령왕') is True:
-                f *= val['정령왕']
+                pinc = val['정령왕']
+            else:
+                pinc = 1
+
+            damp = val.get('투함포')
+            if damp is not None:
+                pinc += (damp - 1)
+
+            f *= pinc
+
+            addf = val.get('추가딜증')
+            if addf is not None:
+                f *= addf
 
             if self.owner.jobname == '眞 스트리트파이터' and self.owner.classname == '격투가(여)':
-                f *= self.inner_data['패시브총합']
+                pf = self.inner_data['패시브총합']
             else:
-                f *= (1 + char_stat['버프'][2]/100) * self.inner_data['패시브총합']
+                f *= (1 + char_stat['버프'][2]/100)
+                pf = self.inner_data['패시브총합']
 
-            d_result[key]['스킬'] = self.calculate_skills(val['시간'], f, val['방어력'], exclude = val['제외스킬'])
+            cooldown = val.get('쿨감')
+
+            d_result[key]['스킬'] = self.calculate_skills(val['시간'], cooldown, pf,  f, val['방어력'], char_stat.get('듀얼수문장'), exclude = val['제외스킬'], active_rate = val['가동률'])
             d_result[key]['스킬'].sort(key=(lambda x: x['최종계수']), reverse=True)
 
             total_deal = sum(sd['데미지'] for sd in d_result[key]['스킬'])
-            total_factor = sum(sd['최종계수'] for sd in d_result[key]['스킬'])
+            total_factor = sum(sd['점수기준'] for sd in d_result[key]['스킬'])
 
+            awkd = 0
+            if self.owner.classTypeNeo is True:
+                if self.owner.classname == '다크나이트' or self.owner.classname == '크리에이터':
+                    for sd in d_result[key]['스킬']:
+                        if sd['requiredLevel'] == 85 and sd['사용횟수'] > 0:
+                            total_deal -= sd['데미지']
+                            total_factor -= sd['점수기준']
+                        elif sd['requiredLevel'] == 100 and sd['사용횟수'] > 0:
+                            awkd += sd['데미지']
+                else:
+                    for sd in d_result[key]['스킬']:
+                        if sd['requiredLevel'] == 50 and sd['사용횟수'] > 0:
+                            total_deal -= sd['데미지']
+                            total_factor -= sd['점수기준']
+                        elif sd['requiredLevel'] in [85, 100] and sd['사용횟수'] > 0 and sd['coolfixed'] is False:
+                            awkd += sd['데미지']
+ 
+            #print(total_factor)
             d_result[key]['기준점수'] = round(total_factor / 100000000000)
             d_result[key]['기준딜'] = round(total_deal)
 
@@ -1075,13 +1642,77 @@ class SkillTree():
         for key, val in d_info['공격유형'].items():
             ratio = val['반영률']
 
-            total_score += (d_result[key]['점수'] * ratio)
-            score_list[key] = round(d_result[key]['점수'])
+            total_score += (d_result[key]['총합딜'] * ratio)
+            score_list[key] = round(d_result[key]['총합딜'])
 
-        score_list['총점'] = round(total_score)
+        #score_list['총점'] = round(total_score)
 
-        d_result['점수표'] = score_list
+        d_result['점수표'] = {'scores': score_list}
 
+        if self.owner.isBuffer is False and d_info['name'] == '시로코':
+            vsum = 0
+
+            d = {}
+            d2 = {}
+
+            for k, v in score_list.items():
+                if k == '지속딜':
+                    vsum += (v / 10000000000000 / 40)
+                    #d[k] = v / 4000000000000
+                    #d2[k] = (v - awkd) / 4000000000000
+                    std = d[k] = v / 4000000000000
+                    std2 = d2[k] = (v - awkd) / 4000000000000
+                elif k == '지속정자극딜':
+                    vsum += (v / 10000000000000 / 48)
+                elif k == '그로기딜':
+                    vsum += (v / 10000000000000 / 25)
+                    d[k] = v / 2500000000000
+                    d2[k] = (v - awkd) / 2500000000000
+                elif k == '정자극딜':
+                    vsum += (v / 10000000000000 / 30)
+                elif k == '80초딜':
+                    d[k] = v / 8000000000000
+                    d2[k] = (v - awkd) / 8000000000000
+                elif k == '60초딜':
+                    d[k] = v / 6000000000000
+                    d2[k] = (v - awkd) / 6000000000000
+
+            if char_stat['char_type'] == '시너지':
+                vsum *= 1.0816
+
+            namep = char_stat.get('모험가명성')
+            if namep is not None:
+                char_stat['points'] = (namep-6068)/15
+
+            char_stat['points'] += vsum * 500
+            
+            d3 = {}
+            for k, v in d.items():
+                d3[k] = d[k]/d2[k]
+
+            for k, v in d.items():
+                d[k] /= std
+                d2[k] /= std2
+ 
+            #print(d)
+            #print(d2)
+            #print(d3)
+            m1 = mean(d2.values())
+            m2 = mean(d3.values())
+            #print(m1)
+            #print(m2)
+            m3 = m2 - m1
+
+            if m3 < 0:
+                m3 = 0
+            elif m3 > 1:
+                m3 = 1
+            #print(m3)
+
+            char_stat['딜밸런스'] = m3
+
+            del d_result['80초딜']
+            del d_result['60초딜']
 
     def calculate_buff(self):
         buff_type = self.buffoption['type']
@@ -1095,7 +1726,7 @@ class SkillTree():
         if buff_type == '아포':
             si = self.get_skill('skills', buff_name, req = 50)
 
-            data = si[0]
+            apod = data = si[0]
             lv = si[1] + si[2]
             alv = lv
 
@@ -1107,7 +1738,9 @@ class SkillTree():
 
             #print ('마을힘', s, '추정치', self.inventory.main_stat['value'], '아포레벨', lv, si[2])
 
-            res = round(v * (1 + s/buff_base))
+            s = self.inventory.main_stat['value']
+
+            res = v * (1 + s/buff_base)
 
             #d_result[buff_type].append((50, buff_name, math.ceil(v), s, res))
 
@@ -1118,9 +1751,10 @@ class SkillTree():
             lv = si[1] + si[2]
             name = data['name']
 
-            res = round(res * (1 + (lv + 23)/100))
+            res1 = round(res * (1 + (lv + 23)/100))
+            res2 = round(res * (1 + (lv + 9)/100))
 
-            d_result[buff_type] = {'name':name, '계수':math.ceil(v), '적용스탯':{'type':main_stat_type, 'value':s}, 'value':res, 'level':alv}
+            d_result[buff_type] = {'name':name, '계수':math.ceil(v), '적용스탯':{'type':main_stat_type, 'value':s}, 'value':res1, 'level':alv, 'level100':lv, 'value2':res2, 'factors': apod['values'], 'buffopts':self.buffoption}
         else:
             d_result[buff_type] = {}
             sl = self._get_skill_instance_all('skills', buff_name, req = 30)
@@ -1135,14 +1769,16 @@ class SkillTree():
 
                     s = self.inventory.main_stat['value']
                     
-                    res = round(v * (1 + s/buff_base))
+                    res = v * (1 + s/buff_base)
 
                     if self.owner.classname == '프리스트(여)':
                         res *= 1.15
                     elif self.owner.classname == '마법사(여)':
                         res *= (1.15 * 1.25)
 
-                    d_result[buff_type]['공'] = {'name':buff_name, '계수':math.ceil(v), '적용스탯':{'type':main_stat_type, 'value':s}, 'value':res, 'level':lv}
+                    res = round(res)
+
+                    d_result[buff_type]['공'] = {'name':buff_name, '계수':math.ceil(v), '적용스탯':{'type':main_stat_type, 'value':s}, 'value':res, 'level':lv, 'factors': data['values'], 'inc':self.buffoption['물공']}
 
                 else:
                     v = data['values'][lv]
@@ -1150,14 +1786,16 @@ class SkillTree():
 
                     s = self.inventory.main_stat['value']
                     
-                    res = round(v * (1 + s/buff_base))
+                    res = v * (1 + s/buff_base)
                     
                     if self.owner.classname == '프리스트(여)':
                         res *= 1.15
                     elif self.owner.classname == '마법사(여)':
                         res *= (1.15 * 1.25)
 
-                    d_result[buff_type]['힘지'] = {'name':buff_name, '계수':math.ceil(v), '적용스탯':{'type':main_stat_type, 'value':s}, 'value':res, 'level':lv}
+                    res = round(res)
+
+                    d_result[buff_type]['힘지'] = {'name':buff_name, '계수':math.ceil(v), '적용스탯':{'type':main_stat_type, 'value':s}, 'value':res, 'level':lv, 'factors': data['values'], 'inc':self.buffoption['힘지'], 'buffopts':self.buffoption}
 
         if '보조스킬' in self.buffoption.keys():
             d_result['보조스킬'] = self.buffoption['보조스킬']                

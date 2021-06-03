@@ -1,1 +1,789 @@
-{"41f1cdc2ff58bb5fdc287be0db2a8df3": {"92da05ec93fb43406e193ffb9a2a629b": {"class": "\u771e \uac80\uadc0", "name": "\uadc0\ud63c\uc77c\uccb4", "extra_options": [], "option_idx": 1, "option_max": 100.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 774, "nick": "ghostknight"}, "37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \uc6e8\ud380\ub9c8\uc2a4\ud130", "name": "\uc624\ubc84\ub4dc\ub77c\uc774\ube0c", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 2]], "option_idx": 1, "option_max": 82.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 774, "nick": "weaponmaster"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ubc84\uc11c\ucee4", "name": "\ud3ed\uc8fc", "extra_options": [["\uacf5\uaca9\uc18d\ub3c4", 2], ["\uc774\ub3d9\uc18d\ub3c4", 3]], "option_idx": 1, "option_max": 116.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 817, "nick": "berserk"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc18c\uc6b8\ube0c\ub9c1\uc5b4", "name": "\uc794\uc601\uc758 \ucf00\uc774\uac00", "extra_options": [["\uc774\ub3d9\uc18d\ub3c4", 3]], "option_idx": 2, "option_max": 69.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 805, "nick": "soulbringer"}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uc544\uc218\ub77c", "name": "\uc0b4\uc758\uc758 \ud30c\ub3d9", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 4]], "option_idx": 5, "option_max": 57.5, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 848, "nick": "asura"}}, "1645c45aabb008c98406b3a16447040d": {"6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ub370\ubaac\uc2ac\ub808\uc774\uc5b4", "name": "\uad11\ud3ed\ud654", "extra_options": [["\uc774\ub3d9\uc18d\ub3c4", 2], ["\uacf5\uaca9\uc18d\ub3c4", 3]], "option_idx": 0, "option_max": 100.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 813, "nick": "daemonslayer"}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \ubca0\uac00\ubcf8\ub4dc", "name": "\uc624\uae30\uc870\uc6d0", "extra_options": [["\uacf5\uaca9\uc18d\ub3c4", 1], ["\uc774\ub3d9\uc18d\ub3c4", 1]], "option_idx": 2, "option_max": 125.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 813, "nick": "vegabond"}, "37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \uc18c\ub4dc\ub9c8\uc2a4\ud130", "name": "\uc2e0\uac80\ud569\uc77c", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 2]], "option_idx": 1, "option_max": 71.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 771, "nick": "swordmaster"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \ub2e4\ud06c\ud15c\ud50c\ub7ec", "name": "\ucee8\uc81c\uc2a4\ud2b8", "extra_options": [], "option_idx": 0, "option_max": 65.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 809, "nick": "darktempler"}}, "ca0f0e0e9e1d55b5f9955b03d9dd213c": {"37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \ub128\ub9c8\uc2a4\ud130", "name": "\uc5ed\ud608\uae30\uacf5", "extra_options": [["\uacf5\uaca9\uc18d\ub3c4", 4], ["\uce90\uc2a4\ud305\uc18d\ub3c4", 5], ["\uba85\uc18d\uc131\uac15\ud654", 1]], "option_idx": 2, "option_max": 43.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 803, "nick": "mnenmaster"}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uadf8\ub798\ud50c\ub7ec", "name": "\ubc18\ub4dc\uc2dc \uc7a1\ub294\ub2e4!", "extra_options": [], "option_idx": 1, "option_max": 108.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 777, "nick": "giant"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \uc2a4\ud2b8\ub9ac\ud2b8\ud30c\uc774\ud130", "name": "\ub4b7\uace8\ubaa9 \uc2f8\uc6c0\ubc95", "extra_options": [], "option_idx": 6, "option_max": 79.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 777, "nick": "mstreetfighter"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc2a4\ud2b8\ub77c\uc774\ucee4", "name": "\uac15\uad8c", "extra_options": [], "option_idx": 2, "option_max": 104.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 820, "nick": "mstriker"}}, "afdf3b989339de478e85b614d274d1ef": {"618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \ub7f0\ucc98", "name": "\ubbf8\ub77c\ud074 \ube44\uc804", "extra_options": [], "option_idx": 2, "option_max": 95.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 812, "nick": "mlauncher"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \uba54\uce74\ub2c9", "name": "\ub85c\ubcf4\ud2f1\uc2a4", "extra_options": [], "option_idx": 3, "option_max": 85.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 811, "nick": "mmechanic"}, "37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \ub808\uc778\uc800", "name": "\ub370\uc2a4 \ubc14\uc774 \ub9ac\ubcfc\ubc84", "extra_options": [], "option_idx": 1, "option_max": 125.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 812, "nick": "mranger"}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uc2a4\ud54f\ud30c\uc774\uc5b4", "name": "\uc624\ubc84 \ucc28\uc9c0", "extra_options": [], "option_idx": 0, "option_max": 84.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 744, "nick": "mspitfire"}}, "17e417b31686389eebff6d754c3401ea": {"da6a126f45370e1a4cbbe8823c6c35be": {"class": "\uc790\uac012", "name": "\uc624\ubc84\ud50c\ub85c\uc6b0", "extra_options": [], "option_idx": 1, "option_max": 54.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 757, "nick": "darknight"}}, "3deb7be5f01953ac8b1ecaa1e25e0420": {"8022a99e29b5e4845985fe1d79a233f3": {"class": "\ub4c0\ub780\ub2ec", "name": "\uc624\ub7ec \ub79c\uc2a4", "extra_options": [], "option_idx": 0, "option_max": 100.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 771, "nick": "duelist"}, "15ce2751ab9c8302f39636cdb7c3dcfa": {"class": "\uc81c\ub178\uc0ac\uc774\ub354", "name": "\ub9c8\ub098 \uc775\uc2a4\ud2b8\ub799\ud2b8", "extra_options": [], "option_idx": 1, "option_max": 85.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 851, "nick": "dragonlancer"}, "80ec67d0356defa46a989914caca5820": {"class": "\uc6cc\ub85c\ub4dc", "name": "\ub9c8\ucc3d \ud574\ubc29", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 2]], "option_idx": 1, "option_max": 80.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 813, "nick": "vanguard"}, "64bbd751c0fcae0e74758b871a2296c1": {"class": "\uc5d0\ub808\ubcf4\uc2a4", "name": "\ub2e4\ud06c\ub2c8\uc2a4", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 2]], "option_idx": 1, "option_max": 93.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 809, "nick": "darklancer"}}, "0ee8fa5dc525c1a1f23fc6911e921e4a": {"64bbd751c0fcae0e74758b871a2296c1": {"class": "\ub4dc\ub808\ub4dc\ub178\ud2b8", "name": "\ud3ed\uc74c\ud3ed\uc2dd", "extra_options": [], "option_idx": 1, "option_max": 85.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 774, "nick": "dragonknight"}, "8022a99e29b5e4845985fe1d79a233f3": {"class": "\ub9c8\uc2e0", "name": "\ube0c\ub808\uc778 \uc2a4\ud1b0", "extra_options": [], "option_idx": 2, "option_max": 100.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 806, "nick": "daemonknight"}, "80ec67d0356defa46a989914caca5820": {"class": "\uac00\uc774\uc544", "name": "\uc6cc\ud06c\ub77c\uc774", "extra_options": [], "option_idx": 1, "option_max": 102.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 774, "nick": "elvenknight"}, "15ce2751ab9c8302f39636cdb7c3dcfa": {"class": "\uc138\uc774\ube44\uc5b4", "name": "\ud398\uc774\uc2a4\ud480", "extra_options": [], "option_idx": 1, "option_max": 89.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 774, "nick": "paladin"}}, "a7a059ebe9e6054c0644b40ef316d6e9": {"c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uadf8\ub798\ud50c\ub7ec", "name": "\ubc18\ub4dc\uc2dc \uc7a1\ub294\ub2e4!", "extra_options": [], "option_idx": 1, "option_max": 107.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 777, "nick": "diva"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc2a4\ud2b8\ub77c\uc774\ucee4", "name": "\uac15\uad8c", "extra_options": [], "option_idx": 2, "option_max": 113.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 820, "nick": "fstriker"}, "37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \ub128\ub9c8\uc2a4\ud130", "name": "\uce74\uc774", "extra_options": [["\uba85\uc18d\uc131\uac15\ud654", 3]], "option_idx": 2, "option_max": 57.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 803, "nick": "fnenmaster"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \uc2a4\ud2b8\ub9ac\ud2b8\ud30c\uc774\ud130", "name": "\ub3c5 \ubc14\ub974\uae30", "extra_options": [], "option_idx": 4, "option_max": 850.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 777, "nick": "poisonmaster"}}, "ddc49e9ad1ff72a00b53c6cff5b1e920": {"37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \ub85c\uadf8", "name": "\uc170\uc774\ud06c \ub2e4\uc6b4", "extra_options": [], "option_idx": 1, "option_max": 77.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 803, "nick": "rogue"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc0ac\ub839\uc220\uc0ac", "name": "\uc554\ud751\uc758 \uc758\uc2dd", "extra_options": [], "option_idx": 0, "option_max": 114.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 802, "nick": "necromancer"}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uc100\ub3c4\uc6b0\ub304\uc11c", "name": "\uc554\uc0b4\uc790\uc758 \ub9c8\uc74c\uac00\uc9d0", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 1]], "option_idx": 2, "option_max": 103.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 820, "nick": "shadowdancer"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ucfe0\ub178\uc774\uce58", "name": "\ud654\ub454 : \ud64d\uc5fc", "extra_options": [], "option_idx": 1, "option_max": 104.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 819, "nick": "siranui"}}, "944b9aab492c15a8474f96947ceeb9e4": {"80ec67d0356defa46a989914caca5820": {"class": "\ud06c\ub9bc\uc2a8\ub85c\uc81c", "name": "\ub370\uc2a4 \ubc14\uc774 \ub9ac\ubcfc\ubc84", "extra_options": [], "option_idx": 1, "option_max": 125.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 812, "nick": "franger"}, "64bbd751c0fcae0e74758b871a2296c1": {"class": "\ud504\ub808\uc774\uc57c", "name": "\uc624\ubc84 \ucc28\uc9c0", "extra_options": [], "option_idx": 0, "option_max": 84.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 744, "nick": "fspitfire"}, "8022a99e29b5e4845985fe1d79a233f3": {"class": "\uc2a4\ud1b0\ud2b8\ub8e8\ud37c", "name": "\ubbf8\ub77c\ud074 \ube44\uc804", "extra_options": [], "option_idx": 2, "option_max": 95.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 812, "nick": "flauncher"}, "15ce2751ab9c8302f39636cdb7c3dcfa": {"class": "\uc635\ud2f0\uba38\uc2a4", "name": "\ub85c\ubcf4\ud2f1\uc2a4", "extra_options": [], "option_idx": 3, "option_max": 85.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 811, "nick": "fmechanic"}}, "0c1b401bb09241570d364420b3ba3fd7": {"c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \ubbf8\uc2a4\ud2b8\ub9ac\uc2a4", "name": "\uc77c\uacf1\uac1c\uc758 \ub300\uc8c4", "extra_options": [], "option_idx": 11, "option_max": 87.5, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 803, "nick": "redemer"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ubb34\ub140", "name": "\uc2e0\ud0c1\uc758 \uae30\uc6d0", "extra_options": [], "option_idx": 0, "option_max": 108.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 803, "nick": "dancer"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc774\ub2e8\uc2ec\ud310\uad00", "name": "\uad11\uc801\uc778 \ubbff\uc74c", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 1]], "option_idx": 2, "option_max": 93.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 789, "nick": "inferno"}, "37495b941da3b1661bc900e68ef3b2c6": {"buffer": {"option_idx": 8, "class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354", "name": "\uc6a9\ub9f9\uc758 \ucd95\ubcf5", "extra_options": [], "nick": "evanbuff", "base_stat": 803}}}, "3909d0b188e9c95311399f776e331da5": {"c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \ub9c8\ub3c4\ud559\uc790", "name": "\uace0\ub300\uc758 \ub3c4\uc11c\uad00", "extra_options": [], "option_idx": 1, "option_max": 92.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 794, "nick": "alchemist"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ubc30\ud2c0\uba54\uc774\uc9c0", "name": "\uc804\uc7a5\uc758 \uc5ec\uc2e0", "extra_options": [], "option_idx": 1, "option_max": 79.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 760, "nick": "battlemage"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc18c\ud658\uc0ac", "name": "\ud658\uc218 \ud3ed\uc8fc", "extra_options": [], "option_idx": 1, "option_max": 79.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 803, "nick": "summoner"}, "37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \uc5d8\ub808\uba58\ud0c8\ub9c8\uc2a4\ud130", "name": "\uc5d8\ub808\uba58\ud0c8 \ubc88", "extra_options": [], "option_idx": 4, "option_max": 85.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 820, "nick": "elemental"}, "92da05ec93fb43406e193ffb9a2a629b": {"buffer": {"option_idx": 2, "class": "\u771e \uc778\ucc48\ud2b8\ub9ac\uc2a4", "name": "\uae08\ub2e8\uc758 \uc800\uc8fc", "extra_options": [], "nick": "enchantbuff", "base_stat": 820}}}, "a5ccbaf5538981c6ef99b236c0a60b73": {"6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ube14\ub7ec\ub4dc \uba54\uc774\uc9c0", "name": "\ube14\ub7ec\ub4dc \ubc88", "extra_options": [], "option_idx": 1, "option_max": 97.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 795, "nick": "bloodmage"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \ube59\uacb0\uc0ac", "name": "\uacf5\uba85", "extra_options": [], "option_idx": 1, "option_max": 80.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 827, "nick": "icemage"}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uc2a4\uc704\ud504\ud2b8 \ub9c8\uc2a4\ud130", "name": "\uc708\ub4dc\ub2c8\uc2a4", "extra_options": [], "option_idx": 0, "option_max": 111.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 795, "nick": "windmage"}, "92da05ec93fb43406e193ffb9a2a629b": {"class": "\u771e \ub514\uba58\uc158\uc6cc\ucee4", "name": "\uacbd\uacc4\ub9dd\uc0c1", "extra_options": [], "option_idx": 1, "option_max": 85.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 827, "nick": "dimrunner"}, "37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \uc5d8\ub808\uba58\ud0c8 \ubc14\uba38", "name": "\ub9c8\ub098 \ud3ed\uc8fc", "extra_options": [], "option_idx": 0, "option_max": 107.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 827, "nick": "warlock"}}, "f6a4ad30555b99b499c07835f87ce522": {"37495b941da3b1661bc900e68ef3b2c6": {"class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354", "name": "\uc131\ub839\uc758 \uba54\uc774\uc2a4", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 2], ["\uc774\ub3d9\uc18d\ub3c4", 6], ["\uacf5\uaca9\uc18d\ub3c4", 16]], "option_idx": 1, "option_max": 97.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 647, "nick": "holybattle", "buffer": {"option_idx": 8, "class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354", "name": "\uc601\uad11\uc758 \ucd95\ubcf5", "extra_options": [], "nick": "holybuff", "base_stat": 815}}, "c9b492038ee3ca8d27d7004cf58d59f3": {"class": "\u771e \uc5b4\ubca4\uc800", "name": "\ucd94\ub77d\ud558\ub294 \uc601\ud63c", "extra_options": [], "option_idx": 0, "option_max": 90.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 803, "nick": "avenger"}, "618326026de1a1f1cfba5dbd0b8396e7": {"class": "\u771e \uc778\ud30c\uc774\ud130", "name": "\uc100\ub3c4\uc6b0 \ubc15\uc11c", "extra_options": [], "option_idx": 1, "option_max": 99.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 789, "nick": "infighter"}, "6d459bc74ba73ee4fe5cdc4655400193": {"class": "\u771e \ud1f4\ub9c8\uc0ac", "name": "\uc5f4\uc815\uc758 \ucc60\ud06c\ub77c", "extra_options": [], "option_idx": 1, "option_max": 76.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 760, "nick": "exocist"}}, "986c2b3d72ee0e4a0b7fcfbe786d4e02": {"8022a99e29b5e4845985fe1d79a233f3": {"class": "\ub808\ud034\uc5e0", "name": "\uc784\ubb34 \uc2dc\uc791", "extra_options": [], "option_idx": 1, "option_max": 94.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 771, "nick": "agent"}, "15ce2751ab9c8302f39636cdb7c3dcfa": {"class": "\uc5b8\ud130\ucc98\ube14", "name": "\uc5ed\uc804\uc758 \uc2b9\ubd80\uc0ac", "extra_options": [], "option_idx": 1, "option_max": 100.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 788, "nick": "troubleshooter"}, "64bbd751c0fcae0e74758b871a2296c1": {"class": "\ud328\uc2a4\ud30c\uc778\ub354", "name": "\ucf54\uc5b4 \ud504\ub809\uc2dc\uc2a4", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 2]], "option_idx": 1, "option_max": 100.0, "ctype": "\ub9c8\ubc95\uacf5\uaca9", "base_stat": 809, "nick": "pathfinder"}, "80ec67d0356defa46a989914caca5820": {"class": "\uac13\ud30c\ub354", "name": "\uc804\uc220 \uc9c0\ud718", "extra_options": [["\uacf5\uaca9\uc18d\ub3c4", 2], ["\uc774\ub3d9\uc18d\ub3c4", 3], ["\uce90\uc2a4\ud305\uc18d\ub3c4", 4]], "option_idx": 1, "option_max": 85.0, "ctype": "\ubb3c\ub9ac\uacf5\uaca9", "base_stat": 813, "nick": "hitman"}}, "b522a95d819a5559b775deb9a490e49a": {"da6a126f45370e1a4cbbe8823c6c35be": {"class": "\uc790\uac012", "name": "\uc99d\ud3ed", "extra_options": [["\ud06c\ub9ac\ud2f0\uceec", 1]], "option_idx": 0, "option_max": 66.0, "ctype": "\ub3c5\ub9bd\uacf5\uaca9", "base_stat": 777, "nick": "creator"}}}
+{
+    "0c1b401bb09241570d364420b3ba3fd7": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 803,
+            "buffer": {
+                "base_stat": 803,
+                "class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354",
+                "extra_options": [],
+                "name": "\uc6a9\ub9f9\uc758 \ucd95\ubcf5",
+                "nick": "evanbuff",
+                "option_idx": 8
+            },
+            "class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc6a9\ub9f9\uc758 \ucd95\ubcf5",
+            "nick": "evan",
+            "option_idx": 8,
+            "option_max": 70.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 789,
+            "class": "\u771e \uc774\ub2e8\uc2ec\ud310\uad00",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    1
+                ]
+            ],
+            "name": "\uad11\uc801\uc778 \ubbff\uc74c",
+            "nick": "inferno",
+            "option_idx": 2,
+            "option_max": 93.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 803,
+            "class": "\u771e \ubb34\ub140",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc2e0\ud0c1\uc758 \uae30\uc6d0",
+            "nick": "dancer",
+            "option_idx": 0,
+            "option_max": 108.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 803,
+            "class": "\u771e \ubbf8\uc2a4\ud2b8\ub9ac\uc2a4",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc77c\uacf1\uac1c\uc758 \ub300\uc8c4",
+            "nick": "redemer",
+            "option_idx": 11,
+            "option_max": 87.5
+        }
+    },
+    "0ee8fa5dc525c1a1f23fc6911e921e4a": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 774,
+            "class": "\u771e \uc5d8\ube10\ub098\uc774\ud2b8",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc6cc\ud06c\ub77c\uc774",
+            "nick": "elvenknight",
+            "option_idx": 1,
+            "option_max": 102.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 806,
+            "class": "\u771e \uce74\uc624\uc2a4",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ube0c\ub808\uc778 \uc2a4\ud1b0",
+            "nick": "daemonknight",
+            "option_idx": 2,
+            "option_max": 100.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 774,
+            "class": "\u771e \ud314\ub77c\ub518",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ud398\uc774\uc2a4\ud480",
+            "nick": "paladin",
+            "option_idx": 1,
+            "option_max": 89.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 774,
+            "class": "\u771e \ub4dc\ub798\uace4\ub098\uc774\ud2b8",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ud3ed\uc74c\ud3ed\uc2dd",
+            "nick": "dragonknight",
+            "option_idx": 1,
+            "option_max": 85.0
+        }
+    },
+    "1645c45aabb008c98406b3a16447040d": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 771,
+            "class": "\u771e \uc18c\ub4dc\ub9c8\uc2a4\ud130",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    2
+                ]
+            ],
+            "name": "\uc2e0\uac80\ud569\uc77c",
+            "nick": "swordmaster",
+            "option_idx": 1,
+            "option_max": 71.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 809,
+            "class": "\u771e \ub2e4\ud06c\ud15c\ud50c\ub7ec",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ucee8\uc81c\uc2a4\ud2b8",
+            "nick": "darktempler",
+            "option_idx": 0,
+            "option_max": 65.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 813,
+            "class": "\u771e \ub370\ubaac\uc2ac\ub808\uc774\uc5b4",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uc774\ub3d9\uc18d\ub3c4",
+                    2
+                ],
+                [
+                    "\uacf5\uaca9\uc18d\ub3c4",
+                    3
+                ]
+            ],
+            "name": "\uad11\ud3ed\ud654",
+            "nick": "daemonslayer",
+            "option_idx": 0,
+            "option_max": 100.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 813,
+            "class": "\u771e \ubca0\uac00\ubcf8\ub4dc",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uacf5\uaca9\uc18d\ub3c4",
+                    1
+                ],
+                [
+                    "\uc774\ub3d9\uc18d\ub3c4",
+                    1
+                ]
+            ],
+            "name": "\uc624\uae30\uc870\uc6d0",
+            "nick": "vegabond",
+            "option_idx": 2,
+            "option_max": 125.0
+        }
+    },
+    "17e417b31686389eebff6d754c3401ea": {
+        "0a49d9c8b5e1358efff324e5cb11d41e": {
+            "base_stat": 757,
+            "class": "\u771e \ub2e4\ud06c\ub098\uc774\ud2b8",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc624\ubc84\ud50c\ub85c\uc6b0",
+            "nick": "darknight",
+            "option_idx": 1,
+            "option_max": 54.0
+        }
+    },
+    "3909d0b188e9c95311399f776e331da5": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 820,
+            "class": "\u771e \uc5d8\ub808\uba58\ud0c8\ub9c8\uc2a4\ud130",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc5d8\ub808\uba58\ud0c8 \ubc88",
+            "nick": "elemental",
+            "option_idx": 4,
+            "option_max": 85.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 803,
+            "class": "\u771e \uc18c\ud658\uc0ac",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ud658\uc218 \ud3ed\uc8fc",
+            "nick": "summoner",
+            "option_idx": 1,
+            "option_max": 25.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 760,
+            "class": "\u771e \ubc30\ud2c0\uba54\uc774\uc9c0",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc804\uc7a5\uc758 \uc5ec\uc2e0",
+            "nick": "battlemage",
+            "option_idx": 1,
+            "option_max": 79.0
+        },
+        "92da05ec93fb43406e193ffb9a2a629b": {
+            "base_stat": 820,
+            "buffer": {
+                "base_stat": 820,
+                "class": "\u771e \uc778\ucc48\ud2b8\ub9ac\uc2a4",
+                "extra_options": [],
+                "name": "\uae08\ub2e8\uc758 \uc800\uc8fc",
+                "nick": "enchantbuff",
+                "option_idx": 2
+            },
+            "class": "\u771e \uc778\ucc48\ud2b8\ub9ac\uc2a4",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uae08\ub2e8\uc758 \uc800\uc8fc",
+            "nick": "enchant",
+            "option_idx": 2,
+            "option_max": 70.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 794,
+            "class": "\u771e \ub9c8\ub3c4\ud559\uc790",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uace0\ub300\uc758 \ub3c4\uc11c\uad00",
+            "nick": "alchemist",
+            "option_idx": 1,
+            "option_max": 28.3
+        }
+    },
+    "3deb7be5f01953ac8b1ecaa1e25e0420": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 813,
+            "class": "\u771e \ubc45\uac00\ub4dc",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    2
+                ]
+            ],
+            "name": "\ub9c8\ucc3d \ud574\ubc29",
+            "nick": "vanguard",
+            "option_idx": 1,
+            "option_max": 80.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 771,
+            "class": "\u771e \ub4c0\uc5bc\ub9ac\uc2a4\ud2b8",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc624\ub7ec \ub79c\uc2a4",
+            "nick": "duelist",
+            "option_idx": 0,
+            "option_max": 100.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 851,
+            "class": "\u771e \ub4dc\ub798\uace0\ub2c8\uc548 \ub79c\uc11c",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub9c8\ub098 \uc775\uc2a4\ud2b8\ub799\ud2b8",
+            "nick": "dragonlancer",
+            "option_idx": 1,
+            "option_max": 85.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 809,
+            "class": "\u771e \ub2e4\ud06c \ub79c\uc11c",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    2
+                ]
+            ],
+            "name": "\ub2e4\ud06c\ub2c8\uc2a4",
+            "nick": "darklancer",
+            "option_idx": 1,
+            "option_max": 93.0
+        }
+    },
+    "41f1cdc2ff58bb5fdc287be0db2a8df3": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 774,
+            "class": "\u771e \uc6e8\ud380\ub9c8\uc2a4\ud130",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    2
+                ]
+            ],
+            "name": "\uc624\ubc84\ub4dc\ub77c\uc774\ube0c",
+            "nick": "weaponmaster",
+            "option_idx": 1,
+            "option_max": 82.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 805,
+            "class": "\u771e \uc18c\uc6b8\ube0c\ub9c1\uc5b4",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uc774\ub3d9\uc18d\ub3c4",
+                    3
+                ]
+            ],
+            "name": "\uc794\uc601\uc758 \ucf00\uc774\uac00",
+            "nick": "soulbringer",
+            "option_idx": 2,
+            "option_max": 69.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 817,
+            "class": "\u771e \ubc84\uc11c\ucee4",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uacf5\uaca9\uc18d\ub3c4",
+                    2
+                ],
+                [
+                    "\uc774\ub3d9\uc18d\ub3c4",
+                    3
+                ]
+            ],
+            "name": "\ud3ed\uc8fc",
+            "nick": "berserk",
+            "option_idx": 1,
+            "option_max": 116.0
+        },
+        "92da05ec93fb43406e193ffb9a2a629b": {
+            "base_stat": 774,
+            "class": "\u771e \uac80\uadc0",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uadc0\ud63c\uc77c\uccb4",
+            "nick": "ghostknight",
+            "option_idx": 1,
+            "option_max": 100.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 848,
+            "class": "\u771e \uc544\uc218\ub77c",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    4
+                ]
+            ],
+            "name": "\uc0b4\uc758\uc758 \ud30c\ub3d9",
+            "nick": "asura",
+            "option_idx": 5,
+            "option_max": 57.5
+        }
+    },
+    "944b9aab492c15a8474f96947ceeb9e4": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 812,
+            "class": "\u771e \ub808\uc778\uc800",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub370\uc2a4 \ubc14\uc774 \ub9ac\ubcfc\ubc84",
+            "nick": "franger",
+            "option_idx": 1,
+            "option_max": 125.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 812,
+            "class": "\u771e \ub7f0\ucc98",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ubbf8\ub77c\ud074 \ube44\uc804",
+            "nick": "flauncher",
+            "option_idx": 2,
+            "option_max": 89.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 811,
+            "class": "\u771e \uba54\uce74\ub2c9",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub85c\ubcf4\ud2f1\uc2a4",
+            "nick": "fmechanic",
+            "option_idx": 3,
+            "option_max": 85.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 744,
+            "class": "\u771e \uc2a4\ud54f\ud30c\uc774\uc5b4",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc624\ubc84 \ucc28\uc9c0",
+            "nick": "fspitfire",
+            "option_idx": 0,
+            "option_max": 84.0
+        }
+    },
+    "986c2b3d72ee0e4a0b7fcfbe786d4e02": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 813,
+            "class": "\u771e \ud788\ud2b8\ub9e8",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uacf5\uaca9\uc18d\ub3c4",
+                    2
+                ],
+                [
+                    "\uc774\ub3d9\uc18d\ub3c4",
+                    3
+                ],
+                [
+                    "\uce90\uc2a4\ud305\uc18d\ub3c4",
+                    4
+                ]
+            ],
+            "name": "\uc804\uc220 \uc9c0\ud718",
+            "nick": "hitman",
+            "option_idx": 1,
+            "option_max": 85.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 771,
+            "class": "\u771e \uc694\uc6d0",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc784\ubb34 \uc2dc\uc791",
+            "nick": "agent",
+            "option_idx": 1,
+            "option_max": 100.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 788,
+            "class": "\u771e \ud2b8\ub7ec\ube14 \uc288\ud130",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc5ed\uc804\uc758 \uc2b9\ubd80\uc0ac",
+            "nick": "troubleshooter",
+            "option_idx": 1,
+            "option_max": 100.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 809,
+            "class": "\u771e \uc2a4\ud398\uc15c\ub9ac\uc2a4\ud2b8",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    2
+                ]
+            ],
+            "name": "\ucf54\uc5b4 \ud504\ub809\uc2dc\uc2a4",
+            "nick": "pathfinder",
+            "option_idx": 1,
+            "option_max": 100.0
+        }
+    },
+    "a5ccbaf5538981c6ef99b236c0a60b73": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 827,
+            "class": "\u771e \uc5d8\ub808\uba58\ud0c8 \ubc14\uba38",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub9c8\ub098 \ud3ed\uc8fc",
+            "nick": "warlock",
+            "option_idx": 0,
+            "option_max": 107.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 827,
+            "class": "\u771e \ube59\uacb0\uc0ac",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uacf5\uba85",
+            "nick": "icemage",
+            "option_idx": 1,
+            "option_max": 80.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 795,
+            "class": "\u771e \ube14\ub7ec\ub4dc \uba54\uc774\uc9c0",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ube14\ub7ec\ub4dc \ubc88",
+            "nick": "bloodmage",
+            "option_idx": 1,
+            "option_max": 97.0
+        },
+        "92da05ec93fb43406e193ffb9a2a629b": {
+            "base_stat": 827,
+            "class": "\u771e \ub514\uba58\uc158\uc6cc\ucee4",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uacbd\uacc4\ub9dd\uc0c1",
+            "nick": "dimrunner",
+            "option_idx": 1,
+            "option_max": 85.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 795,
+            "class": "\u771e \uc2a4\uc704\ud504\ud2b8 \ub9c8\uc2a4\ud130",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc708\ub4dc\ub2c8\uc2a4",
+            "nick": "windmage",
+            "option_idx": 0,
+            "option_max": 111.0
+        }
+    },
+    "a7a059ebe9e6054c0644b40ef316d6e9": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 803,
+            "class": "\u771e \ub128\ub9c8\uc2a4\ud130",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uba85\uc18d\uc131\uac15\ud654",
+                    3
+                ]
+            ],
+            "name": "\uce74\uc774",
+            "nick": "fnenmaster",
+            "option_idx": 2,
+            "option_max": 57.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 820,
+            "class": "\u771e \uc2a4\ud2b8\ub77c\uc774\ucee4",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uac15\uad8c",
+            "nick": "fstriker",
+            "option_idx": 2,
+            "option_max": 107.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 777,
+            "class": "\u771e \uc2a4\ud2b8\ub9ac\ud2b8\ud30c\uc774\ud130",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub3c5 \ubc14\ub974\uae30",
+            "nick": "poisonmaster",
+            "option_idx": 4,
+            "option_max": 850.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 777,
+            "class": "\u771e \uadf8\ub798\ud50c\ub7ec",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ubc18\ub4dc\uc2dc \uc7a1\ub294\ub2e4!",
+            "nick": "diva",
+            "option_idx": 1,
+            "option_max": 107.0
+        }
+    },
+    "afdf3b989339de478e85b614d274d1ef": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 812,
+            "class": "\u771e \ub808\uc778\uc800",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub370\uc2a4 \ubc14\uc774 \ub9ac\ubcfc\ubc84",
+            "nick": "mranger",
+            "option_idx": 1,
+            "option_max": 125.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 812,
+            "class": "\u771e \ub7f0\ucc98",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ubbf8\ub77c\ud074 \ube44\uc804",
+            "nick": "mlauncher",
+            "option_idx": 2,
+            "option_max": 95.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 811,
+            "class": "\u771e \uba54\uce74\ub2c9",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub85c\ubcf4\ud2f1\uc2a4",
+            "nick": "mmechanic",
+            "option_idx": 3,
+            "option_max": 85.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 744,
+            "class": "\u771e \uc2a4\ud54f\ud30c\uc774\uc5b4",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc624\ubc84 \ucc28\uc9c0",
+            "nick": "mspitfire",
+            "option_idx": 0,
+            "option_max": 84.0
+        }
+    },
+    "b522a95d819a5559b775deb9a490e49a": {
+        "0a49d9c8b5e1358efff324e5cb11d41e": {
+            "base_stat": 777,
+            "class": "\u771e \ud06c\ub9ac\uc5d0\uc774\ud130",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    1
+                ]
+            ],
+            "name": "\uc99d\ud3ed",
+            "nick": "creator",
+            "option_idx": 0,
+            "option_max": 66.0
+        }
+    },
+    "ca0f0e0e9e1d55b5f9955b03d9dd213c": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 803,
+            "class": "\u771e \ub128\ub9c8\uc2a4\ud130",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\uacf5\uaca9\uc18d\ub3c4",
+                    4
+                ],
+                [
+                    "\uce90\uc2a4\ud305\uc18d\ub3c4",
+                    5
+                ],
+                [
+                    "\uba85\uc18d\uc131\uac15\ud654",
+                    1
+                ]
+            ],
+            "name": "\uc5ed\ud608\uae30\uacf5",
+            "nick": "mnenmaster",
+            "option_idx": 2,
+            "option_max": 43.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 820,
+            "class": "\u771e \uc2a4\ud2b8\ub77c\uc774\ucee4",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uac15\uad8c",
+            "nick": "mstriker",
+            "option_idx": 2,
+            "option_max": 104.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 777,
+            "class": "\u771e \uc2a4\ud2b8\ub9ac\ud2b8\ud30c\uc774\ud130",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ub4b7\uace8\ubaa9 \uc2f8\uc6c0\ubc95",
+            "nick": "mstreetfighter",
+            "option_idx": 6,
+            "option_max": 73.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 777,
+            "class": "\u771e \uadf8\ub798\ud50c\ub7ec",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ubc18\ub4dc\uc2dc \uc7a1\ub294\ub2e4!",
+            "nick": "giant",
+            "option_idx": 1,
+            "option_max": 108.0
+        }
+    },
+    "ddc49e9ad1ff72a00b53c6cff5b1e920": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 803,
+            "class": "\u771e \ub85c\uadf8",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc170\uc774\ud06c \ub2e4\uc6b4",
+            "nick": "rogue",
+            "option_idx": 1,
+            "option_max": 77.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 802,
+            "class": "\u771e \uc0ac\ub839\uc220\uc0ac",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc554\ud751\uc758 \uc758\uc2dd",
+            "nick": "necromancer",
+            "option_idx": 0,
+            "option_max": 114.0
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 819,
+            "class": "\u771e \ucfe0\ub178\uc774\uce58",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ud654\ub454 : \ud64d\uc5fc",
+            "nick": "siranui",
+            "option_idx": 1,
+            "option_max": 104.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 820,
+            "class": "\u771e \uc100\ub3c4\uc6b0\ub304\uc11c",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    1
+                ]
+            ],
+            "name": "\uc554\uc0b4\uc790\uc758 \ub9c8\uc74c\uac00\uc9d0",
+            "nick": "shadowdancer",
+            "option_idx": 2,
+            "option_max": 103.0
+        }
+    },
+    "f6a4ad30555b99b499c07835f87ce522": {
+        "37495b941da3b1661bc900e68ef3b2c6": {
+            "base_stat": 647,
+            "buffer": {
+                "base_stat": 815,
+                "class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354",
+                "extra_options": [],
+                "name": "\uc601\uad11\uc758 \ucd95\ubcf5",
+                "nick": "holybuff",
+                "option_idx": 8
+            },
+            "class": "\u771e \ud06c\ub8e8\uc138\uc774\ub354",
+            "ctype": "\ub3c5\ub9bd\uacf5\uaca9",
+            "extra_options": [
+                [
+                    "\ud06c\ub9ac\ud2f0\uceec",
+                    2
+                ],
+                [
+                    "\uc774\ub3d9\uc18d\ub3c4",
+                    6
+                ],
+                [
+                    "\uacf5\uaca9\uc18d\ub3c4",
+                    16
+                ]
+            ],
+            "name": "\uc131\ub839\uc758 \uba54\uc774\uc2a4",
+            "nick": "holybattle",
+            "option_idx": 1,
+            "option_max": 97.0
+        },
+        "618326026de1a1f1cfba5dbd0b8396e7": {
+            "base_stat": 789,
+            "class": "\u771e \uc778\ud30c\uc774\ud130",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc100\ub3c4\uc6b0 \ubc15\uc11c",
+            "nick": "infighter",
+            "option_idx": 1,
+            "option_max": 92.25
+        },
+        "6d459bc74ba73ee4fe5cdc4655400193": {
+            "base_stat": 760,
+            "class": "\u771e \ud1f4\ub9c8\uc0ac",
+            "ctype": "\ubb3c\ub9ac\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\uc5f4\uc815\uc758 \ucc60\ud06c\ub77c",
+            "nick": "exocist",
+            "option_idx": 1,
+            "option_max": 76.0
+        },
+        "c9b492038ee3ca8d27d7004cf58d59f3": {
+            "base_stat": 803,
+            "class": "\u771e \uc5b4\ubca4\uc800",
+            "ctype": "\ub9c8\ubc95\uacf5\uaca9",
+            "extra_options": [],
+            "name": "\ucd94\ub77d\ud558\ub294 \uc601\ud63c",
+            "nick": "avenger",
+            "option_idx": 0,
+            "option_max": 90.0
+        }
+    }
+}

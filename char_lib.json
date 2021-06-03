@@ -14,7 +14,7 @@
         "ghostknight"
     ],
     "\uac80\ub9c8": [
-        "\uc5d0\uadf8\ubaac",
+        "Mido",
         "cain",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
@@ -61,6 +61,19 @@
         813,
         "vegabond"
     ],
+    "\uaf2c\ud640": [
+        "\u771e\ud06c\ub8e8\uc138\uc774\ub354",
+        "anton",
+        "\ub3c5\ub9bd\uacf5\uaca9",
+        [
+            "\ud06c\ub85c\uc2a4 \ud06c\ub798\uc26c(\uc2a4\ud0ac)",
+            "\uc6a9\uae30\uc758 \uc740\ucd1d",
+            "\uad73\uac74\ud55c \uc758\uc9c0",
+            "\uc2e0\uc758 \ub300\ud589\uc790"
+        ],
+        674,
+        "holy"
+    ],
     "\ub0a8\ub128": [
         "\uc724\ubcd1\uc900",
         "prey",
@@ -105,8 +118,8 @@
         "mmechanic"
     ],
     "\ub2fc\ub098": [
-        "\uc9c0\uc625",
-        "anton",
+        "\ud478\ub974_",
+        "cain",
         "\ub9c8\ubc95\uacf5\uaca9",
         [
             "\uc5b4\ub460\uc758 \uc18c\uac80 \ub9c8\uc2a4\ud130\ub9acM(\ub9c8\ubc95)[\uc18c\uac80]",
@@ -117,14 +130,14 @@
             "\ud0c0\uc784 \uc2a4\ud1b1",
             "\uc790\uac01M",
             "\ucc28\uc6d0\uc77c\uce58",
-            "\ub178\uc9c4\uac01"
+            "\ud0c0\uc784\ub85c\ub4dc"
         ],
         757,
         "darknight"
     ],
     "\ub370\ud398": [
-        "\uacbd\uace0\uc0ac\uaca9",
-        "prey",
+        "\ub124\uc624\uc758\ubd84\ub178",
+        "cain",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\ub9ac\ubcfc\ubc84 \uac15\ud654M",
@@ -138,22 +151,22 @@
         "mranger"
     ],
     "\ub4c0\uc5bc": [
-        "\ucd5c\uc9c0\uc624",
-        "cain",
+        "\ube1d\ubbf8\ud559\uc0b4",
+        "prey",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uc7a5\ucc3d \uc219\ub828M[\uc7a5\ucc3d]",
             "\ubbf8\ub77c\uc9c0 \ubd80\uc2a4\ud2b8",
             "\ubbf8\ub77c\uc9c0 \uc2a4\ud2b8\ub9bc(\uae30\ubcf8)",
             "\ubb34\ud615\uc758 \ucc3d\uc220\uc0ac",
-            "\ub178\uc9c4\uac01"
+            "\uc77c\uc2e0\uc2dc\ub2f4"
         ],
         771,
         "duelist"
     ],
     "\ub4dc\ub098": [
-        "\uaf43",
-        "hilder",
+        "\ub2ec\ube5b\uc6a9\uae30\uc0ac",
+        "cain",
         "\ub3c5\ub9bd\uacf5\uaca9",
         [
             "\uc544\uc2a4\ud2b8\ub77c \uc18c\ud658",
@@ -161,21 +174,21 @@
             "\ub300\uc2dd\uac00",
             "\ub4dc\ub798\uace4\ud3ec\uc2a4",
             "\uacc4\uc2b9\uc790",
-            "\ub178\uc9c4\uac01"
+            "\uc6a9\ud608\uc758 \uc11c\uc57d"
         ],
         774,
         "dragonknight"
     ],
     "\ub4dc\ub79c": [
-        "\ud669\uae08\ud1b5\ub2ed\uc608\ub9b0",
-        "anton",
+        "\uace0\ub09c\ub4dc\ub79c",
+        "cain",
         "\ub9c8\ubc95\uacf5\uaca9",
         [
             "\uad11\ucc3d \ub9c8\uc2a4\ud130\ub9acM[\uad11\ucc3d]",
             "\ud5cc\ud130\uc988 \uc0e4\ud504\ub2c8\uc2a4",
             "\uc794\ub958 \uac10\uac01",
             "\ud798\uc758 \uadfc\uc6d0",
-            "\ub178\uc9c4\uac01"
+            "\ucf00\ub77c\ube0c\ub178\uc2a4"
         ],
         851,
         "dragonlancer"
@@ -195,8 +208,8 @@
         "diva"
     ],
     "\ub85c\uadf8": [
-        "\ubb3c\uc744\ubca0\uba74\uc218\ucef7",
-        "hilder",
+        "\ucb48\uad6c\ub9ac\ub85c\uadf8",
+        "cain",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uc2a4\uc704\ud504\ud2b8",
@@ -210,15 +223,15 @@
         "rogue"
     ],
     "\ub85c\uc81c": [
-        "\ud2f0\ud0c0\ub2c8\uc548",
-        "diregie",
+        "\ub85c\uc81c\ud30c\ub974\ud398",
+        "anton",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\ub9ac\ubcfc\ubc84 \uac15\ud654M",
             "\uc2a4\ud0c0\uc77c\ub9ac\uc26c",
             "\ubca0\uc77c\ub4dc \ucef7",
             "\uc3d8\uc6b0 \ube14\ub808\uc774\ub4dc",
-            "\ub178\uc9c4\uac01",
+            "\uccb4\uc778 \uc778\ub77c\uc774\ud2bc",
             "\ud328\uc2a4\ud2f0\uc2a4\ud2b8 \uac74(-\uae30\ubcf8\uc0ac\uaca9)"
         ],
         812,
@@ -254,15 +267,15 @@
         "alchemist"
     ],
     "\ub9c8\uc2e0": [
-        "\uc724\ud0dd",
-        "anton",
+        "\uc5d4-\ub780\uce20",
+        "cain",
         "\ub3c5\ub9bd\uacf5\uaca9",
         [
             "\ud63c\ud608",
             "\ud798\uc758 \ub17c\ub9ac",
             "\ucc29\ucde8",
             "\uc544\ud150\uc758 \ud654\uc2e0(\ud2b9\uc815)",
-            "\ub178\uc9c4\uac01"
+            "\uac80\uc740 \ud0dc\uc591"
         ],
         806,
         "daemonknight"
@@ -296,8 +309,8 @@
         "dancer"
     ],
     "\ubbf8\ubbf8": [
-        "\ud761\uc5f0\uc7a5",
-        "cain",
+        "\ubcc4\ub518",
+        "prey",
         "\ub3c5\ub9bd\uacf5\uaca9",
         [
             "G-35L \uc12c\uad11\ub958\ud0c4",
@@ -305,7 +318,7 @@
             "\ubcd1\uae30 \uc219\ub828(\ub3c5\ub9bd)M",
             "\ubcd1\uae30\uac15\ud654",
             "\uc99d\uba85\uc758 \uc5f4\uc1e0",
-            "\ub178\uc9c4\uac01"
+            "\ub2c8\ud2b8\ub85c \ubaa8\ud130-02X"
         ],
         744,
         "fspitfire"
@@ -327,7 +340,7 @@
         "battlemage"
     ],
     "\ubc30\ud06c": [
-        "\uc5c5\uacc4\ud3ec\uc0c1",
+        "\uace0\ub2a5\uc544",
         "prey",
         "\ub3c5\ub9bd\uacf5\uaca9",
         [
@@ -342,7 +355,7 @@
         "holybattle"
     ],
     "\ubc45\uac00": [
-        "\uce69",
+        "\ud0c8\ubca0\ub974",
         "prey",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
@@ -350,7 +363,7 @@
             "\uc784\ud329\ud2b8 \uc2a4\ub9e4\uc26c",
             "\ub9c8\ucc3d \uc9c0\ubc30",
             "\ub9c8\ucc3d \uac01\uc131",
-            "\ub178\uc9c4\uac01"
+            "\ub9c8\ucc3d : \ucc9c\uba78"
         ],
         813,
         "vanguard"
@@ -556,6 +569,20 @@
         827,
         "dimrunner"
     ],
+    "\uc5d0\ubc18": [
+        "\uc2e0\uc131\ub140",
+        "anton",
+        "\ub3c5\ub9bd\uacf5\uaca9",
+        [
+            "\ube5b\uc758\uc740\ucd1d",
+            "\uacc4\uc2dc : \ud06c\ub8e8\uc138\uc774\ub4dc",
+            "\uc2ed\uc790\uac00 \ub9c8\uc2a4\ud130\ub9acM[\uc2ed\uc790\uac00]",
+            "\ub77c\ud30c\uc5d8\uc758 \ucd95\ubcf5",
+            "\ub8e8\ud074\ub80c\ud2f0\uc2a4 \uc5d4\uc824"
+        ],
+        803,
+        "evan"
+    ],
     "\uc5d8\ub9c8": [
         "stram",
         "prey",
@@ -573,14 +600,14 @@
         "elemental"
     ],
     "\uc5d8\ube10": [
-        "\uc138\ub77c\ub2c8\uc544",
+        "\uc544\ub9c8\ub3c4\ub098\uc774\ud2b8",
         "cain",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uac15\uc778\ud55c \uc2e0\ub150M",
-            "\ub300\uc790\uc5f0\uc758 \uac00\ud638(\uacf5\uaca9)(-\ucc9c\ub9c8\uc12c\uad11)(-\ud2b8\uc640\uc77c\ub77c\uc787)",
+            "\ub300\uc790\uc5f0\uc758 \uac00\ud638(\uacf5\uaca9)(-\ucc9c\ub9c8\uc12c\uad11)(-\ud2b8\uc640\uc77c\ub77c\uc787)(-\ud310\ud0c0\uc9c0)",
             "\uc6a9\uae30\uc758 \ubc29\ud328",
-            "\ub178\uc9c4\uac01"
+            "\uadf8\ub808\uc774\uc2a4 \uc624\ube0c \ub77c\uc774\ud504"
         ],
         774,
         "elvenknight"
@@ -610,7 +637,7 @@
             "APG-63M",
             "\uc624\ubc84 \ud788\ud2b8",
             "\uc54c\ud30c \uc11c\ud3ec\ud2b8",
-            "\ub178\uc9c4\uac01"
+            "Pandora_01"
         ],
         812,
         "flauncher"
@@ -624,21 +651,21 @@
             "\ud2b8\ub79c\uc2a4\ud3ec\uba54\uc774\uc158",
             "G \uc775\uc2a4\ud150\uc158",
             "G-\uc624\ud37c\ub808\uc774\ud130",
-            "\ub178\uc9c4\uac01"
+            "\ub9c8\uc774\ud06c\ub85c \ucee8\ud2b8\ub864"
         ],
         811,
         "fmechanic"
     ],
     "\uc694\uc6d0": [
-        "\ud53c\uc758\uc740\ub2e8",
-        "diregie",
+        "\uc900\uc564\uc6b0_\uc694\uc6d0",
+        "cain",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uc694\uc6d0\uc758 \uc804\ud22c\uc220",
             "\uc18c\ud0dc\ub3c4 \ub9c8\uc2a4\ud130\ub9acM[\uc18c\ud0dc\ub3c4]",
             "\uacb0\uc758",
             "\ub0c9\ud608",
-            "\ub178\uc9c4\uac01"
+            "\ubb34\uacb0"
         ],
         771,
         "agent"
@@ -674,6 +701,18 @@
         827,
         "warlock"
     ],
+    "\uc778\ucc48": [
+        "\ucfe0\ub85c\ub124\ucf54",
+        "cain",
+        "\ub3c5\ub9bd\uacf5\uaca9",
+        [
+            "\uc0ac\uc545\ud55c \ud638\uae30\uc2ec",
+            "\uc5b4\ub460\uc5d0 \ud53c\ub294 \uc7a5\ubbf8",
+            "\ubd88\uae38\ud55c \ub208\uc6c3\uc74c"
+        ],
+        820,
+        "enchant"
+    ],
     "\uc778\ud30c": [
         "\uadf8\uc778\ud30c",
         "cain",
@@ -689,8 +728,8 @@
         "infighter"
     ],
     "\uc778\ud398": [
-        "Trx.",
-        "prey",
+        "\uae68\ub057\ud55c\uc808\ub2e8\uba74",
+        "hilder",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uc131\ud654",
@@ -703,8 +742,8 @@
         "inferno"
     ],
     "\uc7a5\uad70": [
-        "\ud329\uc158",
-        "bakal",
+        "\uc804\ub7b5\uc2dc\ubb3c",
+        "diregie",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "G-35L \uc12c\uad11\ub958\ud0c4",
@@ -764,8 +803,8 @@
         "siranui"
     ],
     "\ud06c\ub9ac": [
-        "\ud568\ud3ec\uc758\uc5ec\uc2e0",
-        "prey",
+        "\ub124\uc774\ub4dc4",
+        "cain",
         "\ub3c5\ub9bd\uacf5\uaca9",
         [
             "\uc0c1\uc0c1\ub825M",
@@ -773,7 +812,7 @@
             "\uc774\ud574",
             "\uc790\uac01M",
             "\ucc9c\uc9c0\ucc3d\uc870",
-            "\ub178\uc9c4\uac01"
+            "\ucc3d\uc870\uc758 \uc544\ud2f0\ud329\ud2b8"
         ],
         777,
         "creator"
@@ -794,21 +833,21 @@
         "exocist"
     ],
     "\ud2b8\uc288": [
-        "\uc131\ucea1",
-        "bakal",
+        "\uadf8\uc73c\ube0c",
+        "siroco",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uc911\uac80 \ub9c8\uc2a4\ud130\ub9acM[\uc911\uac80]",
             "\ud654\uc57d \ub2e4\ub8e8\uae30",
             "\ub9ac\uc778\ud3ec\uc2a4 \ud30c\uc774\uc5b4",
             "\ud669\uc57c\uc758 \ubb34\ubc95\uc790",
-            "\ub178\uc9c4\uac01"
+            "\ud558\ub4dc\ubcf4\uc77c\ub4dc"
         ],
         788,
         "troubleshooter"
     ],
     "\ud314\ub77c": [
-        "\ubc29\ud328\ub85c\ub9c9\uc544\uc694",
+        "\uc624\uc0c9\ube5b\uae54\ub0e5\uc774",
         "prey",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
@@ -816,21 +855,21 @@
             "\uc138\ub77c\ud53d \ud398\ub354M[\ub454\uae30]",
             "\uae00\ub85c\ub9ac \uc624\ube0c \ub354 \ub77c\uc774\ud2b8M",
             "\ucee4\ub9e8\ub4dc\uba3c\ud2b8",
-            "\ub178\uc9c4\uac01"
+            "\uc719 \uc624\ube0c \uba54\ud0c0\ud2b8\ub860"
         ],
         774,
         "paladin"
     ],
     "\ud328\ud30c": [
-        "\uc2a4\ud398\uc15c\uc9c4\uad6c",
-        "casillas",
+        "\ud788\ud788\uc7ac\ubc0c\ub2f9",
+        "prey",
         "\ub9c8\ubc95\uacf5\uaca9",
         [
             "\ucf54\uc5b4 \ube14\ub808\uc774\ub4dc \ub9c8\uc2a4\ud130\ub9acM[\ucf54\uc5b4\ube14\ub808\uc774\ub4dc]",
             "\uc778\uc81d\uc158",
             "\uc570\ud50c\ub9ac\ud30c\uc774",
             "\ucf54\uc5b4 \ud328\ub7ec\ub2e4\uc784",
-            "\ub178\uc9c4\uac01"
+            "\uc2f1\uade4\ub798\ub9ac\ud2f0 \ucf54\uc5b4"
         ],
         809,
         "pathfinder"
@@ -852,7 +891,7 @@
         "mstriker"
     ],
     "\ud751\ucc3d": [
-        "\uc720\ub839",
+        "\ud22c\ucc59\ub0a8",
         "prey",
         "\ub9c8\ubc95\uacf5\uaca9",
         [
@@ -861,21 +900,21 @@
             "\ub9c8\ucc3d \ud3ed\uc8fc",
             "\uc5b4\ub460\uc758 \uc9c0\ubc30\uc790",
             "\uc2ec\uc5f0\uc5d0 \ub4dc\ub9ac\uc6b4 \uc5b4\ub460",
-            "\ub178\uc9c4\uac01"
+            "\uc5c4\uc2b5\ud558\ub294 \uc5b4\ub460"
         ],
         809,
         "darklancer"
     ],
     "\ud79b\ub9e8": [
-        "\uc778\uc0ac\ub2f4\ub2f9\uc790",
-        "prey",
+        "\uc9c4\uc0e4\ud06c",
+        "casillas",
         "\ubb3c\ub9ac\uacf5\uaca9",
         [
             "\uc7a5\ub3c4 \ub9c8\uc2a4\ud130\ub9acM[\uc7a5\ub3c4]",
             "\uc219\ub828\ub41c \uc804\ubb38\uac00",
             "B.G \ud30c\uc774\uc5b4\ud234",
             "B.C \ud2b8\ub808\uc774\ub2dd",
-            "\ub178\uc9c4\uac01"
+            "\ub354\uc2a4\ud06c \ud0dd\ud2f1\uc2a4"
         ],
         813,
         "hitman"
